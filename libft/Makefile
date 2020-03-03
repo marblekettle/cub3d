@@ -6,12 +6,12 @@
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/28 13:17:49 by bmans         #+#    #+#                  #
-#    Updated: 2019/11/05 16:08:42 by bmans         ########   odam.nl          #
+#    Updated: 2020/03/03 15:27:13 by bmans         ########   odam.nl          #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libft.a
-INCLUDE = .
+INCLUDE = ../includes
 SRCS = \
 ft_atoi.c		ft_bzero.c		ft_calloc.c		ft_isalnum.c	ft_isalpha.c \
 ft_isascii.c	ft_isdigit.c	ft_isprint.c	ft_itoa.c		ft_memccpy.c \

@@ -5,19 +5,21 @@
 /*                                                     +:+                    */
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/27 16:20:02 by bmans         #+#    #+#                 */
-/*   Updated: 2020/02/27 16:21:34 by bmans         ########   odam.nl         */
+/*   Created: 2020/02/27 16:20:02 by bmans          #+#    #+#                */
+/*   Updated: 2020/03/03 13:35:56 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibx/macos/mlx.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
+#include <stdint.h>
 
-/* 
+/*
 ** mlx_init, mlx_new_window
 ** mlx_clear_window, mlx_pixel_put
 ** mlx_new_image, mlx_get_data_addr
@@ -32,7 +34,7 @@
 ** mlx_mouse_move, mlx_mouse_get_pos
 ** mlx_do_key_autorepeatoff, mlx_do_key_autorepeaton
 ** mlx_do_sync, mlx_sync
-*/ 
+*/
 
 int		whitenoise(void **params)
 {
@@ -63,6 +65,12 @@ int		test(int *a)
 		printf("%d\n", a[i]);
 	fflush(0);
 	sleep(1000);
+	return (0);
+}
+
+int		printimage()
+{
+
 	return (0);
 }
 
