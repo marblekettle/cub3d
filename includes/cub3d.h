@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/03 15:26:06 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/05 14:22:19 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct	s_world
 	void		*mlx;
 	void		*window;
 	t_list		*l_textures;
+	t_list		*l_maps;
 }				t_world;
 
 typedef struct	s_map
