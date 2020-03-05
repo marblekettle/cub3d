@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 13:34:49 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/03 15:49:26 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/05 11:29:49 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ char	load_texture(t_world *world, char *file, t_texture **texture)
 	if (!ttex)
 	{
 		perror("Error: Out of memory\n");
-		free(img);
 		return (0);
 	}
 	img = open_texture(world, file, ttex);
 	if (!img)
+	{
+		free(ttex);
 		return (0);
+	}
 	imgdata = mlx_get_data_addr(img, &bits_pp, &linesize, &(ttex->endian));
 	ttex->imgdata = (uint32_t *)imgdata;
 	ttex->bytes_pp = bits_pp / 8;
@@ -100,8 +102,6 @@ void	clear_texture(void *texture)
 	{
 		if (texture_ptr->name)
 			free(texture_ptr->name);
-		if (texture_ptr->imgdata)
-			free(texture_ptr->imgdata);
 		free(texture_ptr);
 	}
 }

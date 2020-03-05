@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   t_world.c                                          :+:    :+:            */
+/*   world.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/03 15:25:09 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/05 12:01:58 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	world_end(void *world)
 
 	world_ptr = (t_world *)world;
 	ft_lstclear(&(world_ptr->l_textures), &clear_texture);
-	free(world_ptr->mlx);
-	if (world_ptr->window)
-		free(world_ptr->window);
+	free(world_ptr->l_textures);
+	mlx_destroy_window(world_ptr->mlx, world_ptr->window);
 	free(world);
 }
 
