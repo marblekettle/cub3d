@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/05 15:54:40 by bmans         #+#    #+#                 */
-/*   Updated: 2019/11/05 15:54:41 by bmans         ########   odam.nl         */
+/*   Created: 2019/11/05 15:54:40 by bmans          #+#    #+#                */
+/*   Updated: 2020/03/09 14:16:54 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void				ft_putnchar(int c, size_t n);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
 char				*ft_itoa_base(U_INT n, U_INT base, char *basedigits);
+int					get_next_line(int fd, char **line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 09:55:37 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/05 14:53:44 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/09 14:18:17 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	append(char **tline, int *index, int *cread, char *buf)
 	int		newindex;
 	int		oldlen;
 
-	newindex = index;
+	newindex = *index;
 	while (newindex < BUFFER_SIZE && buf[newindex] && buf[newindex] != '\n')
 		newindex++;
 	oldlen = 0;
