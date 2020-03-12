@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/12 10:36:36 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/12 14:55:55 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct	s_world
 char			file_exists(char *file);
 int				get_texture_pixel(t_texture *texture, int x, int y);
 void			*open_texture(t_world *world, char *file, t_texture *texture);
-char			load_texture(t_world *world, char *file, t_texture **texture);
+t_texture		load_texture(t_world *world, char *file, t_texture **texture);
 void			clear_texture(void *texture);
 void			world_end(void *world);
 t_world			*world_init(void);

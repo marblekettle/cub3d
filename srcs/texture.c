@@ -6,13 +6,12 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 13:34:49 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/12 10:33:19 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/12 14:44:35 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
-#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -64,36 +63,27 @@ void	*open_texture(t_world *world, char *file, t_texture *texture)
 	return (img);
 }
 
-char	load_texture(t_world *world, char *file, t_texture **tex)
+t_texture	*load_texture(t_world *world, char *file)
 {
-	t_texture	*ttex;
+	t_texture	*tex;
 	void		*img;
 	char		*imgdata;
 	int			linesize;
 	int			bits_pp;
 
-	ttex = malloc(sizeof(t_texture));
-	if (!ttex)
-	{
-		perror("Error: Out of memory\n");
-		return (0);
-	}
-	img = open_texture(world, file, ttex);
-	if (!img)
-	{
-		free(ttex);
-		return (0);
-	}
-	imgdata = mlx_get_data_addr(img, &bits_pp, &linesize, &(ttex->endian));
-	ttex->imgdata = (uint32_t *)imgdata;
-	ttex->bytes_pp = bits_pp / 8;
-	ttex->linesize = linesize / ttex->bytes_pp;
-	ft_lstadd_back(&(world->l_textures), ft_lstnew(ttex));
-	*tex = ttex;
-	return (1);
+	tex = malloc(sizeof(t_texture));
+	if (!tex)
+		error_throw("Error: Out of memory\n", world, NULL);
+	img = open_texture(world, file, tex);
+	imgdata = mlx_get_data_addr(img, &bits_pp, &linesize, &(tex->endian));
+	tex->imgdata = (uint32_t *)imgdata;
+	tex->bytes_pp = bits_pp / 8;
+	tex->linesize = linesize / tex->bytes_pp;
+	ft_lstadd_back(&(world->l_textures), ft_lstnew(tex));
+	return(tex);
 }
 
-void	clear_texture(void *texture)
+void		clear_texture(void *texture)
 {
 	t_texture *texture_ptr;
 
