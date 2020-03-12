@@ -24,7 +24,7 @@ typedef struct	s_world
 
 typedef struct	s_map
 {
-	char		*map;
+	char		**map;
 }				t_map;
 
 typedef struct	s_texture
