@@ -93,7 +93,7 @@ int		main(void)
 		params[0] = mlx;
 		params[1] = win;
 		mlx_clear_window(mlx, win);
-		img = mlx_png_file_to_image(mlx, "mick.png", &dim[0], &dim[1]);
+		img = mlx_xpm_file_to_image(mlx, "mick.xpm", &dim[0], &dim[1]);
 		if (img)
 		{
 			imgstr = mlx_get_data_addr(img, &dim[2], &dim[3], &dim[4]);
@@ -104,7 +104,7 @@ int		main(void)
 			for (int j = 0; j < 235; j++)
 			{
 				for (int i = 0; i < 235; i++)
-					mlx_pixel_put(mlx, win, i / 5 + 20, j / 3 + 20, colorstr[i + dim[3]/4 * j]);
+					mlx_pixel_put(mlx, win, i / 2 + 20, j / 2 + 20, colorstr[i + dim[3]/4 * j]);
 			}
 			mlx_loop(mlx);
 		}
