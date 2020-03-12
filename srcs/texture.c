@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   t_texture.c                                        :+:    :+:            */
+/*   texture.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 13:34:49 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/05 11:29:49 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/12 10:33:19 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*open_texture(t_world *world, char *file, t_texture *texture)
 	return (img);
 }
 
-char	load_texture(t_world *world, char *file, t_texture **texture)
+char	load_texture(t_world *world, char *file, t_texture **tex)
 {
 	t_texture	*ttex;
 	void		*img;
@@ -88,8 +88,8 @@ char	load_texture(t_world *world, char *file, t_texture **texture)
 	ttex->imgdata = (uint32_t *)imgdata;
 	ttex->bytes_pp = bits_pp / 8;
 	ttex->linesize = linesize / ttex->bytes_pp;
-	ttex->name = ft_strdup(file);
-	*texture = ttex;
+	ft_lstadd_back(&(world->l_textures), ft_lstnew(ttex));
+	*tex = ttex;
 	return (1);
 }
 
@@ -99,9 +99,5 @@ void	clear_texture(void *texture)
 
 	texture_ptr = (t_texture *)texture;
 	if (texture_ptr)
-	{
-		if (texture_ptr->name)
-			free(texture_ptr->name);
 		free(texture_ptr);
-	}
 }

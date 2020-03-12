@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 10:05:32 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/10 14:46:19 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/12 11:47:42 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void	ft_cleararray(char **arr)
+void	ft_arrayclear(char **arr)
 {
 	int i;
 
@@ -48,7 +48,7 @@ void	ft_arraypush_back(char ***arr, char *new)
 	char	**newarr;
 	size_t	len;
 
-	if (!arr || !*arr)
+	if (!arr)
 		return ;
 	len = ft_arraysize(*arr);
 	newarr = malloc(sizeof(char *) * (len + 2));
@@ -108,27 +108,4 @@ char	**ft_makearray(size_t len, ...)
 	va_end(args);
 	arr[i] = NULL;
 	return (arr);
-}
-
-int		main(void)
-{
-	char	**arr;
-	int		i;
-
-	arr = ft_makearray(2, "banana");
-	printf("%zu\n", ft_arraysize(arr));
-	free(arr[1]);
-	arr[1] = ft_strdup("cherry");
-	printf("%zu\n", ft_arraysize(arr));
-	i = 0;
-	ft_arraypush_back(&arr, "dragonfruit");
-	ft_arraypush_front(&arr, "apple");
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
-	printf("%zu\n", ft_arraysize(arr));
-	ft_cleararray(arr);
-	printf("%zu\n", ft_arraysize(arr));
 }

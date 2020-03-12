@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 09:55:37 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/09 14:18:17 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/12 13:52:47 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static char	append(char **tline, int *index, int *cread, char *buf)
 	*tline = newline;
 	*cread -= newindex - *index;
 	*index = newindex;
-	if (*index == BUFFER_SIZE)
-		*index = 0;
 	return (1);
 }
 
@@ -75,10 +73,10 @@ static char	read_buf(char *buf, int fd, int *cread, int *index)
 
 	if (buf[*index] == '\n')
 	{
-		(*index) = ((*index) + 1) % BUFFER_SIZE;
+		(*index)++;
 		(*cread)--;
 	}
-	if (!buf[*index])
+	if (*index == BUFFER_SIZE || !buf[*index])
 		*index = 0;
 	if (*cread == 0)
 	{
@@ -108,9 +106,28 @@ int			get_next_line(int fd, char **line)
 	{
 		if (!append(&tline, &index, &cread, buf))
 			return (-1);
-		if (!buf[index] || buf[index] == '\n')
+		if ((index != BUFFER_SIZE && !buf[index]) || buf[index] == '\n')
 			break ;
 	}
 	*line = tline;
 	return (cread > 0 ? 1 : cread);
+}
+
+int		main()
+{
+	char	*line;
+	int		ret;
+	int		fd;
+
+	fd = open("../test.cub", O_RDWR);
+	ret = 1;
+	while (ret > 0)
+	{
+		ret = get_next_line(fd, &line);
+		printf("[%s][%d]\n", line, ret);
+		if (ret >= 0)
+			free(line);
+	}
+	close(fd);
+	return (0);
 }
