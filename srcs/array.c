@@ -16,18 +16,21 @@
 #include <stdio.h>
 #include <string.h>
 
-void	ft_arrayclear(char **arr)
+void	ft_arrayclear(char ***arr)
 {
 	int i;
 
+	if (!arr || !(*arr))
+		return ;
 	i = 0;
-	while (arr[i])
+	while ((*arr)[i])
 	{
-		free(arr[i]);
-		arr[i] = NULL;
+		free((*arr)[i]);
+	(*arr)[i] = NULL;
 		i++;
 	}
-	free(arr);
+	free(*arr);
+	*arr = NULL;
 }
 
 size_t	ft_arraysize(char **arr)

@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:20:58 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/12 11:48:33 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/17 18:06:04 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,22 @@ static char		check_prefix_walltex(char **split, t_map *map, t_world *world)
 {
 	if (!ft_strncmp(split[0], "NO", 3) && ft_arraysize(split) == 2)
 	{
-		load_texture(world, split[1], &(map->no_tex));
+		map->no_tex = load_texture(world, split[1]);
 		return ('N');
 	}
 	else if (!ft_strncmp(split[0], "SO", 3) && ft_arraysize(split) == 2)
 	{
-		load_texture(world, split[1], &(map->so_tex));
+		map->so_tex = load_texture(world, split[1]);
 		return ('S');
 	}
 	else if (!ft_strncmp(split[0], "WE", 3) && ft_arraysize(split) == 2)
 	{
-		load_texture(world, split[1], &(map->we_tex));
+		map->we_tex = load_texture(world, split[1]);
 		return ('W');
 	}
 	else if (!ft_strncmp(split[0], "EA", 3) && ft_arraysize(split) == 2)
 	{
-		load_texture(world, split[1], &(map->ea_tex));
+		map->ea_tex = load_texture(world, split[1]);
 		return ('E');
 	}
 	return (0);
@@ -80,18 +80,61 @@ static char		check_prefix(char *str, t_map *map, t_world *world)
 	}
 	else
 		ret = check_prefix_walltex(split, map, world);
-	ft_arrayclear(split);
+	ft_arrayclear(&split);
 	return (ret);
+}
+
+static char		check_spot(char **map, int i, int j)
+{
+	if (i == 0 || j == 0 || !map[j + 1])
+		return (0);
+	if (!map[j][i + 1] || map[j][i + 1] == ' ')
+		return (0);
+	if (!map[j][i - 1] || map[j][i - 1] == ' ')
+		return (0);
+	if (ft_strlen(map[j - 1]) <= i || ft_strlen(map[j + 1]) <= i)
+		return (0);
+	if (!map[j + 1][i] || map[j + 1][i] == ' ')
+		return (0);
+	if (!map[j - 1][i] || map[j - 1][i] == ' ')
+		return (0);
+	if (!map[j + 1][i + 1] || map[j + 1][i + 1] == ' ')
+		return (0);
+	if (!map[j - 1][i + 1] || map[j - 1][i + 1] == ' ')
+		return (0);
+	if (!map[j + 1][i - 1] || map[j + 1][i - 1] == ' ')
+		return (0);
+	if (!map[j - 1][i - 1] || map[j - 1][i - 1] == ' ')
+		return (0);
+	return (1);
 }
 
 static char		check_map(char **map)
 {
-	if (map)
-		return (1);
-	return (0);
+	int i;
+	int j;
+
+	if (!map)
+		return (0);
+	j = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i])
+		{
+			if (map[j][i] != ' ' && map[j][i] != '1')
+			{
+				if (!check_spot(map, i, j))
+					return (0);
+			}
+			i++;
+		}		
+		j++;
+	}
+	return (1);
 }
 
-static char		parse_map_from_file(int fd, t_map *map, t_world *world)
+static void		parse_map_from_file(int fd, t_map *map, t_world *world)
 {
 	char *line;
 	char ret;
@@ -101,48 +144,31 @@ static char		parse_map_from_file(int fd, t_map *map, t_world *world)
 	{
 		ret = (char)get_next_line(fd, &line);
 		if (ret == -1)
-		{
-			perror("Error\nFile error");
-			return (0);
-		}
+			error_throw("File error", world, map);
 		if (ft_strlen(line) > 0 && !check_prefix(line, map, world))
 			ft_arraypush_back(&(map->map), line);
 		if (ret >= 0)
 			free(line);
 	}
 	if (!check_map(map->map))
-	{
-		ft_arrayclear(map->map);
-		perror("Error\nMap contains invalid structure");
-		map->map = NULL;
-		return (0);
-	}
-	return (1);
+		error_throw("Map contains invalid structure", world, map);
 }
 
-char			load_map(char *file, t_map **map, t_world *world)
+t_map			*load_map(char *file, t_world *world)
 {
 	t_map	*tmap;
 	int		fd;
 
 	tmap = malloc(sizeof(t_map));
 	if (!tmap)
-	{
-		perror("Error\nOut of memory\n");
-		return (0);
-	}
+		error_throw("Out of memory", world, NULL);
 	tmap->map = NULL;
 	fd = open(file, O_RDWR);
-	if (fd < 0 || ft_strncmp(file + ft_strlen(file) - 4, ".cub", 5))
-	{
-		free(tmap);
-		perror(fd >= 0 ? "Error\nFile not in .cub format\n" : "");
-		perror(fd < 0 ? "Error\nFile not found\n" : "");
-		return (0);
-	}
-	if (!parse_map_from_file(fd, tmap, world))
-		return (0);
+	if (fd < 0)
+		error_throw("File not found", world, tmap);
+	if (ft_strncmp(file + ft_strlen(file) - 4, ".cub", 5))
+		error_throw("File not in .cub format", world, tmap);
+	parse_map_from_file(fd, tmap, world);
 	world->map = tmap;
-	*map = tmap;
-	return (1);
+	return (tmap);
 }

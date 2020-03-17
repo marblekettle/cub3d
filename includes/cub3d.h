@@ -16,11 +16,13 @@
 
 typedef struct	s_texture
 {
+	char		*name;
 	int			linesize;
 	int			width;
 	int			height;
 	int			bytes_pp;
 	int			endian;
+	void		*img;
 	U_INT		*imgdata;
 }				t_texture;
 
@@ -48,15 +50,17 @@ typedef struct	s_world
 char			file_exists(char *file);
 int				get_texture_pixel(t_texture *texture, int x, int y);
 void			*open_texture(t_world *world, char *file, t_texture *texture);
-t_texture		load_texture(t_world *world, char *file, t_texture **texture);
+t_texture		*load_texture(t_world *world, char *file);
 void			clear_texture(void *texture);
 void			world_end(void *world);
+void			error_throw(const char *err, t_world *world, void *tofree);
 t_world			*world_init(void);
 char			**ft_makearray(size_t len, ...);
 void			ft_arraypush_front(char ***arr, char *new);
 void			ft_arraypush_back(char ***arr, char *new);
 size_t			ft_arraysize(char **arr);
-void			ft_arrayclear(char **arr);
-char			load_map(char *file, t_map **map, t_world *world);
+void			ft_arrayclear(char ***arr);
+t_map			*load_map(char *file, t_world *world);
+void			draw_rect(int *coords, int color, t_world *world);
 
 #endif

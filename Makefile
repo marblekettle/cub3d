@@ -1,16 +1,16 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
-#    Created: 2020/02/27 14:49:12 by bmans         #+#    #+#                  #
-#    Updated: 2020/02/27 14:49:13 by bmans         ########   odam.nl          #
+#    Created: 2020/02/27 14:49:12 by bmans          #+#    #+#                 #
+#    Updated: 2020/03/17 16:02:05 by brendan       ########   odam.nl          #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
-NAME_IN = test.c
+NAME_IN = test_map.c
 NAME_OUT = a.out
 SRCS_DIR = srcs
 HEADER_DIR = includes
@@ -26,10 +26,12 @@ libft:
 	make -C $(LIB_DIR) clean
 
 linux:
-	gcc $(NAME_IN) -I$(HEADER_DIR) -I$(HEADER_DIR_LINUX) -L$(LIB_DIR) -L$(LIB_DIR_LINUX) -lft -lmlx -lX11 -lXext -o $(NAME_OUT)
+	gcc $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) -I$(HEADER_DIR_LINUX) \
+	-L$(LIB_DIR) -L$(LIB_DIR_LINUX) -lft -lmlx -lm -lX11 -lXext -o $(NAME_OUT) -g
 
 macos:
-	gcc $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) -I$(HEADER_DIR_MACOS) -L$(LIB_DIR) -L$(LIB_DIR_MACOS) -lft -lmlx -lX11 -lXext -o $(NAME_OUT)
+	gcc $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) -I$(HEADER_DIR_MACOS) \
+	-L$(LIB_DIR) -L$(LIB_DIR_MACOS) -lft -lmlx -o $(NAME_OUT)
 
 clean:
 	rm $(NAME_OUT)

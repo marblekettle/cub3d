@@ -87,7 +87,7 @@ static char	read_buf(char *buf, int fd, int *cread, int *index)
 			i++;
 		}
 		*cread = read(fd, buf, BUFFER_SIZE);
-		if (cread <= 0)
+		if (*cread <= 0)
 			return (0);
 	}
 	return (1);
@@ -111,23 +111,4 @@ int			get_next_line(int fd, char **line)
 	}
 	*line = tline;
 	return (cread > 0 ? 1 : cread);
-}
-
-int		main()
-{
-	char	*line;
-	int		ret;
-	int		fd;
-
-	fd = open("../test.cub", O_RDWR);
-	ret = 1;
-	while (ret > 0)
-	{
-		ret = get_next_line(fd, &line);
-		printf("[%s][%d]\n", line, ret);
-		if (ret >= 0)
-			free(line);
-	}
-	close(fd);
-	return (0);
 }

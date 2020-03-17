@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/12 14:48:36 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/17 16:20:18 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,20 @@ void	world_end(void *world)
 		world_ptr = (t_world *)world;
 		ft_lstclear(&(world_ptr->l_textures), &clear_texture);
 		ft_arrayclear(&(world_ptr->map->map));
-		mlx_destroy_window(world_ptr->mlx, world_ptr->window);
-		free(world);
+		if (world_ptr->window)
+			mlx_destroy_window(world_ptr->mlx, world_ptr->window);
+		free(world_ptr);
 	}
 }
 
-void	error_throw(char *err_message, t_world *world, void **tofree)
+void	error_throw(const char *err, t_world *world, void *tofree)
 {
-	perror(err_message);
+	perror("Error\n");
+	perror(err);
+	perror("\n");
 	if (tofree != NULL)
 		free(tofree);
 	world_end(world);
-	while (1) {};
 	exit(0);
 }
 
@@ -45,13 +47,13 @@ t_world	*world_init(void)
 
 	world = malloc(sizeof(t_world));
 	if (!world)
-		error_throw("Error\nOut of memory\n", world, NULL);
+		error_throw("Out of memory", world, NULL);
 	else
 	{
 		ft_memset(world, 0, sizeof(t_world));
 		world->mlx = mlx_init();
 		if (!world->mlx)
-			error_throw("Error\nCould not initialize MiniLibX\n", world, NULL);
+			error_throw("Could not initialize MiniLibX", world, NULL);
 	}
 	return (world);
 }

@@ -11,20 +11,23 @@
 /* ************************************************************************** */
 
 #include "mlx.h"
+#include <stdio.h>
 
 int		is_in_fractal(double a, double b)
 {
 	int		rep;
 	double	za;
 	double	zb;
+	double	t;
 
 	rep = 1000;
 	za = a;
 	zb = b;
-	while (rep > 0)
+	while (rep > 0 && (za * za) + (zb * zb) < 2.0)
 	{
-		za = (za * za) - (zb * zb) + a;
+		t = (za * za) - (zb * zb) + a;
 		zb = (2.0 * za * zb) + b;
+		za = t;
 		rep--;
 	}
 	if ((za * za) + (zb * zb) < 2.0)

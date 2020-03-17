@@ -15,6 +15,7 @@
 #include "libftprintf.h"
 
 // 123 <- , 124 -> , 125 v , 126 ^
+// 65361 <- , 65363 -> , 65364 v , 65362 ^
 
 int g_posit[2] = {0, 0};
 
@@ -29,7 +30,8 @@ int		show_texture(void *world)
 	world_ptr = (t_world *)world;
 	mlx_clear_window(world_ptr->mlx, world_ptr->window);
 	tex_ptr = (t_texture *)(world_ptr->l_textures->content);
-	y = 0;
+	mlx_put_image_to_window(world_ptr->mlx, world_ptr->window, tex_ptr->img, g_posit[0], g_posit[1]);
+/*	y = 0;
 	while (y < 100)
 	{
 		x = 0;
@@ -40,7 +42,7 @@ int		show_texture(void *world)
 			x++;
 		}
 		y++;
-	}
+	} */
 	return (1);
 }
 
@@ -53,16 +55,16 @@ void	shutdown(t_world *world)
 
 int		key_hook(int keycode, void *world)
 {
-//	ft_printf("%d\n", keycode);
-	if (keycode == 53)
+	ft_printf("%d\n", keycode);
+	if (keycode == 53 || keycode == 65307)
 		shutdown(world);
-	if (keycode == 123 && g_posit[0] > 0)
+	if ((keycode == 123 || keycode == 65361) && g_posit[0] > 0)
 		g_posit[0] -= 10;
-	if (keycode == 124 && g_posit[0] < 300)
+	if ((keycode == 124 || keycode == 65363) && g_posit[0] < 300)
 		g_posit[0] += 10;
-	if (keycode == 125 && g_posit[1] < 300)
+	if ((keycode == 125 || keycode == 65364) && g_posit[1] < 300)
 		g_posit[1] += 10;
-	if (keycode == 126 && g_posit[1] > 0)
+	if ((keycode == 126 || keycode == 65362) && g_posit[1] > 0)
 		g_posit[1] -= 10;
 	return (0);
 }
@@ -75,12 +77,11 @@ int		main(void)
 	world = world_init();
 	if (world)
 		ft_printf("World created successfully\n");
-	if (!load_texture(world, "mick.png", &tex))
-		ft_printf("Texture %s not loaded!\n", "mick.png");
-	else
-		ft_lstadd_back(&(world->l_textures), ft_lstnew(tex));
+	tex = load_texture(world, "mick.xpm"); 
+	if (!tex)
+		ft_printf("Texture %s not loaded!\n", "mick.xpm");
 	world->window = mlx_new_window(world->mlx, 400, 400, "window");
-	mlx_hook(world->window, 2, 0, &key_hook, world);
+	mlx_hook(world->window, 2, 1L << 0, &key_hook, world);
 	mlx_loop_hook(world->mlx, &show_texture, world);
 	mlx_loop(world->mlx);
 	return (0);
