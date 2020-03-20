@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/12 14:55:55 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/20 12:16:12 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,9 @@ size_t			ft_arraysize(char **arr);
 void			ft_arrayclear(char ***arr);
 t_map			*load_map(char *file, t_world *world);
 void			draw_rect(int *coords, int color, t_world *world);
+void			draw_line(int *coord, int color, t_world *world);
+
+void			swap_int(int *a, int *b);
+int	    		abs_int(int num);
 
 #endif
