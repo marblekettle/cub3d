@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:56:35 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/05 12:04:00 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/26 15:50:25 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		key_hook(int keycode, void *world)
 		g_posit[1] += 10;
 	if ((keycode == 126 || keycode == 65362) && g_posit[1] > 0)
 		g_posit[1] -= 10;
+	show_texture(world);
 	return (0);
 }
 
@@ -82,7 +83,8 @@ int		main(void)
 		ft_printf("Texture %s not loaded!\n", "mick.xpm");
 	world->window = mlx_new_window(world->mlx, 400, 400, "window");
 	mlx_hook(world->window, 2, 1L << 0, &key_hook, world);
-	mlx_loop_hook(world->mlx, &show_texture, world);
+	show_texture(world);
+//	mlx_loop_hook(world->mlx, &show_texture, world);
 	mlx_loop(world->mlx);
 	return (0);
 }

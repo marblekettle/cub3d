@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_rect.c                                        :+:    :+:            */
+/*   arrayaux.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/17 16:23:49 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/22 02:30:41 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/31 16:05:23 by brendan        #+#    #+#                */
+/*   Updated: 2020/03/31 16:48:47 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "libft.h"
-#include "mlx.h"
 
-void	draw_rect(int *ul_point, int *lr_point, int color, t_world *world)
+char	ft_arrayfind(int *spot, char *term, char **arr)
 {
-	int x;
-	int y;
-
-	y = ul_point[1];
-	while (y <= lr_point[1])
+	int		i;
+	char	*found;
+	
+	found = NULL;
+	while (*term)
 	{
-		x = ul_point[0];
-		while (x <= lr_point[0])
+		i = 0;
+		while (arr[i])
 		{
-			mlx_pixel_put(world->mlx, world->window, x, y, color);
-			x++;
+			found = ft_strchr(arr[i], *term);
+			if (found)
+			{
+				spot[0] = found - arr[i];
+				spot[1] = i;
+				return (*term);
+			}
+			i++;
 		}
-		y++;
+		term++;
 	}
+	return (0);
 }

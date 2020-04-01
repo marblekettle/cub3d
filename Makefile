@@ -6,11 +6,11 @@
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/27 14:49:12 by bmans          #+#    #+#                 #
-#    Updated: 2020/03/20 12:16:47 by brendan       ########   odam.nl          #
+#    Updated: 2020/03/31 17:34:46 by brendan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_IN = test_map.c
+NAME_IN = test_maze.c
 NAME_OUT = a.out
 SRCS_DIR = srcs
 HEADER_DIR = includes

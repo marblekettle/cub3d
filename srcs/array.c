@@ -6,15 +6,13 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 10:05:32 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/12 11:47:42 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/20 16:58:39 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdarg.h>
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
 void	ft_arrayclear(char ***arr)
 {

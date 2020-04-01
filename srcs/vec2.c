@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_rect.c                                        :+:    :+:            */
+/*   vec2.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/17 16:23:49 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/22 02:30:41 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/30 12:41:26 by brendan        #+#    #+#                */
+/*   Updated: 2020/03/30 12:44:41 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "libft.h"
-#include "mlx.h"
+#include <math.h>
 
-void	draw_rect(int *ul_point, int *lr_point, int color, t_world *world)
+void 	vec2_join(int *vecout, int *vec1, int *vec2)
 {
-	int x;
-	int y;
+	int	newvec[4];
 
-	y = ul_point[1];
-	while (y <= lr_point[1])
-	{
-		x = ul_point[0];
-		while (x <= lr_point[0])
-		{
-			mlx_pixel_put(world->mlx, world->window, x, y, color);
-			x++;
-		}
-		y++;
-	}
+	ft_memcpy(newvec, vec1, 8);
+	ft_memcpy(newvec + 2, vec2, 8);
+	ft_memcpy(vecout, newvec, 16);
+}
+
+void	vec2_rot(double *out, double *in, double r, double theta)
+{
+	double	tvec[2];
+
+	tvec[0] = in[0] * r * cos(theta) - in[1] * r * sin(theta);
+	tvec[1] = in[0] * r * sin(theta) + in[1] * r * cos(theta);
+	ft_memcpy(out, tvec, 16);
 }

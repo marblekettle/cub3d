@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/05 11:14:05 by bmans         #+#    #+#                 */
-/*   Updated: 2019/12/05 11:14:05 by bmans         ########   odam.nl         */
+/*   Created: 2019/12/05 11:14:05 by bmans          #+#    #+#                */
+/*   Updated: 2020/03/27 13:22:02 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ typedef struct	s_print
 	char		pad;
 	char		left;
 	char		conv;
+	int			out;
 }				t_print;
 
 int				ft_printf(const char *format, ...);
+int				ft_printf_fd(int fd, const char *format, ...);
 void			ft_print_flags(t_print *print);
 char			*ft_print_resize(char *str, t_print *print);
 char			*ft_itoa_prec(int n, int prec);

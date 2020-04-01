@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_rect.c                                        :+:    :+:            */
+/*   clear_texture.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/17 16:23:49 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/22 02:30:41 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/27 00:33:17 by brendan        #+#    #+#                */
+/*   Updated: 2020/03/27 00:34:33 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 #include "libft.h"
 #include "mlx.h"
 
-void	draw_rect(int *ul_point, int *lr_point, int color, t_world *world)
+void		clear_texture(t_world *world, t_texture *texture)
 {
-	int x;
-	int y;
-
-	y = ul_point[1];
-	while (y <= lr_point[1])
+	if (texture)
 	{
-		x = ul_point[0];
-		while (x <= lr_point[0])
-		{
-			mlx_pixel_put(world->mlx, world->window, x, y, color);
-			x++;
-		}
-		y++;
+		if (texture->img)
+			mlx_destroy_image(world->mlx, texture->img);
+		if (texture->name)
+			free(texture->name);
+		free(texture);
+	}
+}
+
+void		clear_texture_list(t_world *world, t_list *lst)
+{
+	if (lst)
+	{
+		clear_texture_list(world, lst->next);
+		clear_texture(world, (t_texture *)lst->content);
 	}
 }

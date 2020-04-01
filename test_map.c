@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:28:24 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/12 11:54:20 by bmans         ########   odam.nl         */
+/*   Updated: 2020/03/20 17:29:33 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "mlx.h"
 #include "libftprintf.h"
 
-int		color_by_char(char c)
+int		color_by_char(char c, t_world *world)
 {
 	if (c == '1')
-		return (0xAA0000);
+		return (world->map->cl_color);
 	if (c == '0')
-		return (0x888888);
+		return (world->map->fl_color);
 	if (c == '2')
 		return (0x00AA00);
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
@@ -45,7 +45,7 @@ void	draw_map(t_world *world, int dist)
 			coords[1] = (y * dist) + 1;
 			coords[2] = ((x + 1) * dist) - 1;
 			coords[3] = ((y + 1) * dist) - 1;
-			draw_rect(coords, color_by_char(map[y][x]), world);
+			draw_rect(coords, color_by_char(map[y][x], world), world);
 			x++;
 		}
 		y++;

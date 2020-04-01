@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/13 15:51:07 by bmans         #+#    #+#                 */
-/*   Updated: 2020/01/13 15:51:07 by bmans         ########   odam.nl         */
+/*   Created: 2020/01/13 15:51:07 by bmans          #+#    #+#                */
+/*   Updated: 2020/03/27 13:28:40 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_print_ptr(t_print *print)
 		print->form = NULL;
 		return ;
 	}
-	ft_putstr_fd(pstr, 1);
+	ft_putstr_fd(pstr, print->out);
 	print->len += ft_strlen(pstr);
 	free(pstr);
 }
