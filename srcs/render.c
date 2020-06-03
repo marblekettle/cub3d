@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/30 11:42:57 by brendan        #+#    #+#                */
-/*   Updated: 2020/04/01 14:24:06 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
+/*   Updated: 2020/05/21 16:34:25 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft.h"
 #include "mlx.h"
 #include "math.h"
+
+#include <stdio.h>
 
 static int	texture_x(t_ray *ray, t_texture *tex)
 {
@@ -41,6 +43,24 @@ static int	texture_y(int j, double dist, t_texture *tex, t_world *world)
 	else
 		return ((int)(tex->height * newj * dist / (double)world->win_h));
 }
+
+/*
+**	static int	darken(int color, double rate)
+**	{
+**	unsigned char	rgb[3];
+**	int				out;
+**
+**	if (rate < 2.0)
+**		return (color);
+**	rgb[0] = (color & 0xFF0000) >> 16;
+**	rgb[1] = (color & 0xFF00) >> 8;
+**	rgb[2] = (color & 0xFF);
+**	rgb[0] = (unsigned char)(rgb[0] * 2.0 / rate);
+**	rgb[1] = (unsigned char)(rgb[1] * 2.0 / rate);
+**	rgb[2] = (unsigned char)(rgb[2] * 2.0 / rate);
+**	return (rgb[2] + (rgb[1] << 8) + (rgb[0] << 16));
+**	}
+*/
 
 static int	color_select(int y, int tex_x, t_ray *ray, t_world *world)
 {
@@ -81,6 +101,7 @@ void		render(t_world *world)
 	double	raydir[4];	
 	int		i;
 	double	x;
+
 
 	ft_memcpy(raydir, world->player->pos, 16);
 	i = 0;

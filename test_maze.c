@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/31 17:34:35 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/31 17:34:37 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/31 17:34:35 by brendan       #+#    #+#                 */
+/*   Updated: 2020/05/13 16:03:23 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,74 @@
 #include <stdio.h>
 
 double	g_pi = 3.1415927;
+void	*g_mapwin = NULL;
+t_world	*g_mapworld = NULL;
+
+
+void	drawmapgrid(t_world *world)
+{
+	int		i;
+	int		j;
+	int		point[4];
+	int		col;
+
+	i = 0;
+	while ((world->map->map)[i])
+	{
+		j = 0;
+		while ((world->map->map)[i][j])
+		{
+			point[0] = (j * 40) + 2;
+			point[1] = (i * 40) + 2;
+			point[2] = ((j + 1) * 40) - 2;
+			point[3] = ((i + 1) * 40) - 2;
+			if ((world->map->map)[i][j] != ' ')
+			{
+				if ((world->map->map)[i][j] == '0')
+					col = world->map->fl_color;
+				if ((world->map->map)[i][j] == '1')
+					col = world->map->cl_color;
+				if ((world->map->map)[i][j] == 'S')
+					col = 0x888888;
+				draw_rect(point, point + 2, col, g_mapworld);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	drawmap(t_world *world)
+{
+	int		playpnt[6];
+	int		raypnt[6];
+	double	posdir[4];
+	t_ray	*ray;
+
+	mlx_clear_window(g_mapworld->mlx, g_mapworld->window);
+	drawmapgrid(world);
+	playpnt[0] = (int)((world->player->pos)[0] * 40) - 2;
+	playpnt[1] = (int)((world->player->pos)[1] * 40) - 2;
+	playpnt[2] = (int)((world->player->pos)[0] * 40) + 2;
+	playpnt[3] = (int)((world->player->pos)[1] * 40) + 2;
+	playpnt[4] = (int)((world->player->pos)[0] * 40);
+	playpnt[5] = (int)((world->player->pos)[1] * 40);
+	ft_memcpy(posdir, world->player->pos, 16);
+	ft_memcpy(posdir + 2, world->player->dir, 16);
+	draw_rect(playpnt, playpnt + 2, 0xFF0000, g_mapworld);
+	ray = malloc(sizeof(t_ray));
+	cast_ray(posdir, ray, world);
+	raypnt[0] = (int)((ray->point)[0] * 40) - 2;
+	raypnt[1] = (int)((ray->point)[1] * 40) - 2;
+	raypnt[2] = (int)((ray->point)[0] * 40) + 2;
+	raypnt[3] = (int)((ray->point)[1] * 40) + 2;
+	raypnt[4] = (int)((ray->point)[0] * 40);
+	raypnt[5] = (int)((ray->point)[1] * 40);
+	draw_line(playpnt + 4, raypnt + 4, 0xFF0000, g_mapworld);
+	draw_rect(playpnt, playpnt + 2, 0xFF0000, g_mapworld);
+	draw_rect(raypnt, raypnt + 2, 0xFF0000, g_mapworld);
+	free(ray);
+}
 
 void	shutdown(t_world *world)
 {
@@ -46,6 +114,7 @@ int		key_hook(int keycode, void *world_ptr)
 		world->player->pos[0] += world->player->dir[0] * 0.05;
 		world->player->pos[1] += world->player->dir[1] * 0.05;
 	}
+	drawmap(world);
 	render(world);
 	return (0);
 }
@@ -66,14 +135,19 @@ int		main(void)
 	t_actor	*player;
 
 	world = world_init();
+	g_mapwin = mlx_new_window(world->mlx, 400, 400, "map");
+	g_mapworld = malloc(sizeof(t_world));
+	g_mapworld->mlx = world->mlx;
+	g_mapworld->window = g_mapwin;
 	map = load_map("./test.cub", world);
 //	printf("%s\n", world->map->so_tex->name);
 	player = malloc(sizeof(t_actor));
 	ft_memcpy(player->pos, world->map->init_pos, 16);
 	ft_memcpy(player->dir, world->map->init_dir, 16);
 	world->player = player;
-	prepare_window(world, "window");
+	prepare_window(world, "Labyrus vA0.01 - Powered by Loup3D");
 	render(world);
+	drawmap(world);
 	mlx_hook(world->window, 2, 1L << 0, &key_hook, world);
 //	mlx_loop_hook(world->mlx, &loop_hook, world);
 	mlx_loop(world->mlx);

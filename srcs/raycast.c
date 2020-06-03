@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/24 15:39:17 by brendan        #+#    #+#                */
-/*   Updated: 2020/04/01 15:00:35 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/24 15:39:17 by brendan       #+#    #+#                 */
+/*   Updated: 2020/05/22 12:57:56 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ static char		check_mappoint(int *point, t_map *map)
 	return (map->map[point[1]][point[0]]);
 }
 
+static void		ray_inter()
+{
+	
+}
+
 void			cast_ray(double *pos_dir, t_ray *ray, t_world *world)
 {
 	char	vert;
@@ -74,13 +79,17 @@ void			cast_ray(double *pos_dir, t_ray *ray, t_world *world)
 	{
 		ray->dist += jump_point(ray->point, pos_dir + 2, &vert);
 		if (vert == 2)
+		{
 			ray->map_point[1] += (pos_dir[3] > 0.0) ? 1 : -1;
+			ray->side = (ray->point[1] - 0.5 < ray->map_point[1]) ? 'N' : 'S';
+		}
 		else if (vert == 1)
+		{
 			ray->map_point[0] += (pos_dir[2] > 0.0) ? 1 : -1;
+			ray->side = (ray->point[0] - 0.5 < ray->map_point[0]) ? 'W' : 'E';
+		}
 		ray->content = check_mappoint(ray->map_point, world->map);
+		if (ray->content = '2')
+			ray_inter(&ray);
 	}
-	if (vert == 1)
-		ray->side = (ray->point[0] - 0.5 < ray->map_point[0]) ? 'W' : 'E';
-	else if (vert == 2)
-		ray->side = (ray->point[1] - 0.5 < ray->map_point[1]) ? 'N' : 'S';
 }
