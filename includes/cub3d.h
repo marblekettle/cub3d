@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/05/21 16:08:16 by brendan       ########   odam.nl         */
+/*   Updated: 2020/06/03 10:31:24 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # endif
 # include "libftprintf.h"
 
-typedef struct	s_texture
+typedef struct		s_texture
 {
 	char			*name;
 	int				linesize;
@@ -29,7 +29,7 @@ typedef struct	s_texture
 	U_INT			*imgdata;
 }					t_texture;
 
-typedef struct	s_map
+typedef struct		s_map
 {
 	char			**map;
 	int				fl_color;
@@ -41,7 +41,6 @@ typedef struct	s_map
 	t_texture		*we_tex;
 	t_texture		*ea_tex;
 }					t_map;
-
 
 typedef struct		s_actor
 {

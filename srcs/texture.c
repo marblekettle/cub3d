@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/26 21:44:35 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/30 11:48:13 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/26 21:44:35 by brendan       #+#    #+#                 */
+/*   Updated: 2020/06/03 10:30:54 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ t_texture	*load_texture(t_world *world, const char *file)
 	if (!tex->imgdata)
 		error_throw("Could not process image data: %s", world, tex, file);
 	ft_lstadd_back(&(world->l_textures), ft_lstnew(tex));
-	return(tex);
+	return (tex);
 }

@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 15:21:44 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/31 15:22:08 by brendan       ########   odam.nl         */
+/*   Updated: 2020/06/03 10:03:58 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		prepare_window(t_world *world, const char *name)
 
 	dim[0] = world->win_w;
 	dim[1] = world->win_h;
-	world->window = mlx_new_window(world->mlx, dim[0], dim[1], name);
+	world->window = mlx_new_window(world->mlx, dim[0], dim[1], (char *)name);
 	if (!world->window)
 		error_throw("Could not create window: %s", world, NULL, name);
 	img = mlx_new_image(world->mlx, dim[0], dim[1]);

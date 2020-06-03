@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/24 15:39:17 by brendan       #+#    #+#                 */
-/*   Updated: 2020/05/22 12:57:56 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/24 15:39:17 by brendan        #+#    #+#                */
+/*   Updated: 2020/06/03 10:01:14 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ static char		check_mappoint(int *point, t_map *map)
 	return (map->map[point[1]][point[0]]);
 }
 
+/*
 static void		ray_inter()
 {
 	
 }
+*/
 
 void			cast_ray(double *pos_dir, t_ray *ray, t_world *world)
 {
@@ -89,7 +91,7 @@ void			cast_ray(double *pos_dir, t_ray *ray, t_world *world)
 			ray->side = (ray->point[0] - 0.5 < ray->map_point[0]) ? 'W' : 'E';
 		}
 		ray->content = check_mappoint(ray->map_point, world->map);
-		if (ray->content = '2')
-			ray_inter(&ray);
+		//if (ray->content = '2')
+		//	ray_inter(&ray);
 	}
 }
