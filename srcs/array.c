@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/10 10:05:32 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/20 16:58:39 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/10 10:05:32 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/03 11:52:32 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_arrayclear(char ***arr)
 	while ((*arr)[i])
 	{
 		free((*arr)[i]);
-	(*arr)[i] = NULL;
+		(*arr)[i] = NULL;
 		i++;
 	}
 	free(*arr);

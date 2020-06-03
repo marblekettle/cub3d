@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/05 14:28:24 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/20 17:29:33 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/05 14:28:24 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/03 12:18:28 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	draw_map(t_world *world, int dist)
 			coords[1] = (y * dist) + 1;
 			coords[2] = ((x + 1) * dist) - 1;
 			coords[3] = ((y + 1) * dist) - 1;
-			draw_rect(coords, color_by_char(map[y][x], world), world);
+			draw_rect(coords, coords + 2, color_by_char(map[y][x], world), world);
 			x++;
 		}
 		y++;
@@ -64,14 +64,14 @@ int		main(void)
 	map = load_map("./test.cub", world);
 	if (!map)
 		ft_printf("Map %s not loaded!\n", "test.cub");
-	ft_printf("%d, %d\n", world->win_width, world->win_height);
+	ft_printf("%d, %d\n", world->win_w, world->win_h);
 	i = 0;
 	while (world->map->map[i] != NULL)
 	{
 		ft_printf("%s\n", world->map->map[i]);
 		i++;
 	}
-	world->window = mlx_new_window(world->mlx, world->win_width, world->win_height, "window");
+	world->window = mlx_new_window(world->mlx, world->win_w, world->win_h, "window");
 	draw_map(world, 25);
 	mlx_loop(world->mlx);
 	return (0);

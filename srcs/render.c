@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/05/21 16:34:25 by brendan       ########   odam.nl         */
+/*   Updated: 2020/06/03 12:46:25 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 
 static int	texture_x(t_ray *ray, t_texture *tex)
 {
-	double slice;
+	double	slice;
+	int		tex_x;
 
 	if (ray->side == 'S' || ray->side == 'N')
 		slice = ray->point[0] - ray->map_point[0];
@@ -29,7 +30,10 @@ static int	texture_x(t_ray *ray, t_texture *tex)
 		slice = 0.0;
 	if (ray->side == 'N' || ray->side == 'E')
 		slice = 1.0 - slice;
-	return ((int)(slice * tex->width));
+	tex_x = (int)(slice * tex->width);
+	if (tex_x >= tex->width)
+		tex_x = tex->width - 1;
+	return (tex_x);
 }
 
 static int	texture_y(int j, double dist, t_texture *tex, t_world *world)
@@ -98,10 +102,9 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 void		render(t_world *world)
 {
 	t_ray	ray;
-	double	raydir[4];	
+	double	raydir[4];
 	int		i;
 	double	x;
-
 
 	ft_memcpy(raydir, world->player->pos, 16);
 	i = 0;
@@ -114,6 +117,6 @@ void		render(t_world *world)
 		render_column(i, &ray, world);
 		i++;
 	}
-		mlx_put_image_to_window(world->mlx, world->window, \
+	mlx_put_image_to_window(world->mlx, world->window, \
 							world->screen->img, 0, 0);
 }

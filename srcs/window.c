@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/31 15:21:44 by brendan        #+#    #+#                */
-/*   Updated: 2020/06/03 10:03:58 by bmans         ########   odam.nl         */
+/*   Created: 2020/03/31 15:21:44 by brendan       #+#    #+#                 */
+/*   Updated: 2020/06/03 12:46:04 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void		prepare_window(t_world *world, const char *name)
 		error_throw("Out of memory", world, img, NULL);
 	ft_bzero(world->screen, sizeof(t_texture));
 	world->screen->img = img;
+	world->screen->width = dim[0];
+	world->screen->height = dim[1];
 	process_texture_data(world->screen, world);
 }
