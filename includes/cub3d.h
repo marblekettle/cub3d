@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/03 10:31:24 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/05 15:30:38 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_texture
 	int				height;
 	int				bytes_pp;
 	int				endian;
+	int				trans;
 	void			*img;
 	U_INT			*imgdata;
 }					t_texture;
@@ -42,14 +43,19 @@ typedef struct		s_map
 	t_texture		*ea_tex;
 }					t_map;
 
-typedef struct		s_actor
+typedef	struct		s_objtype
+{
+	char			id;
+	double			rad;
+	t_texture		*sprite;
+}					t_objtype;
+
+typedef struct		s_obj
 {
 	double			pos[2];
 	double			dir[2];
-	double			rad;
-	t_texture		*sprite;
-
-}					t_actor;
+	t_objtype		*type;
+}					t_obj;
 
 typedef struct		s_world
 {
@@ -59,8 +65,10 @@ typedef struct		s_world
 	int				win_h;
 	t_texture		*screen;
 	t_list			*l_textures;
+	t_list			*l_objtypes;
+	t_list			*l_objs;
 	t_map			*map;
-	t_actor			*player;
+	t_obj			*player;
 }					t_world;
 
 typedef struct		s_ray

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/05 14:20:58 by bmans          #+#    #+#                */
-/*   Updated: 2020/04/01 14:20:52 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/05 14:20:58 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/05 13:30:31 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char		check_map(char **map)
 					return (0);
 			}
 			i++;
-		}		
+		}
 		j++;
 	}
 	return (1);

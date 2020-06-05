@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/26 21:44:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/03 12:47:27 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/05 13:39:58 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	*open_texture(t_world *world, char *file, t_texture *texture)
 	return (img);
 }
 
-void	process_texture_data(t_texture *texture, t_world *world)
+void		process_texture_data(t_texture *texture, t_world *world)
 {
 	void	*img;
 	char	*imgdata;
@@ -56,7 +56,7 @@ void	process_texture_data(t_texture *texture, t_world *world)
 	texture->linesize = linesize / texture->bytes_pp;
 }
 
-char	*texture_name(const char *file)
+char		*texture_name(const char *file)
 {
 	char	*name;
 	int		i;

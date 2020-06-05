@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 17:34:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/03 12:00:49 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/05 16:41:10 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int		key_hook(int keycode, void *world_ptr)
 		world->player->pos[0] += world->player->dir[0] * 0.05;
 		world->player->pos[1] += world->player->dir[1] * 0.05;
 	}
-	//drawmap(world);
+	drawmap(world);
 	render(world);
 	return (0);
 }
@@ -132,18 +132,18 @@ int		main(void)
 {
 	t_world	*world;
 	t_map	*map;
-	t_actor	*player;
+	t_obj	*player;
 
 	world = world_init();
-	//g_mapwin = mlx_new_window(world->mlx, 400, 400, "map");
-	//g_mapworld = malloc(sizeof(t_world));
-	//g_mapworld->mlx = world->mlx;
-	//g_mapworld->window = g_mapwin;
+	g_mapwin = mlx_new_window(world->mlx, 400, 400, "map");
+	g_mapworld = malloc(sizeof(t_world));
+	g_mapworld->mlx = world->mlx;
+	g_mapworld->window = g_mapwin;
 	ft_printf("Init successful\n");
 	map = load_map("./test.cub", world);
 	ft_printf("Map load successful\n");
 //	printf("%s\n", world->map->so_tex->name);
-	player = malloc(sizeof(t_actor));
+	player = malloc(sizeof(t_obj));
 	ft_memcpy(player->pos, world->map->init_pos, 16);
 	ft_memcpy(player->dir, world->map->init_dir, 16);
 	world->player = player;
@@ -151,7 +151,7 @@ int		main(void)
 	prepare_window(world, "Labyrus vA0.01 - Powered by Loup3D");
 	ft_printf("Window prepared\n");
 	render(world);
-	//drawmap(world);
+	drawmap(world);
 	mlx_hook(world->window, 2, 1L << 0, &key_hook, world);
 //	mlx_key_hook(world->window, &key_hook, world);
 //	mlx_loop_hook(world->mlx, &loop_hook, world);

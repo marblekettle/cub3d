@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/05 15:54:40 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/09 14:16:54 by bmans         ########   odam.nl         */
+/*   Created: 2019/11/05 15:54:40 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/05 14:15:18 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void				ft_putnchar_fd(int c, size_t n, int fd);
 void				ft_lstprint(t_list *lst);
 t_list				*ft_lstpop(t_list **lst);
 void				ft_lstdel(t_list **lst, void (*del)(void *));
+t_list				*ft_lstfind(const char *needle, t_list *haystack);
 char				ft_iswhite(int c);
 void				ft_putchar(int c);
 void				ft_putendl(char *s);

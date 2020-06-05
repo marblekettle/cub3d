@@ -6,7 +6,7 @@
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/27 14:49:12 by bmans         #+#    #+#                  #
-#    Updated: 2020/06/03 12:48:04 by bmans         ########   odam.nl          #
+#    Updated: 2020/06/05 13:20:35 by bmans         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ HEADER_DIR = includes
 HEADER_DIR_LINUX = minilibx/linux/include
 HEADER_DIR_MACOS = minilibx/macos
 LIB_DIR_LINUX = minilibx/linux
-LIB_DIR_MACOS = minilibx/macos
+LIB_DIR_MACOS = .
 LIB_DIR = libft
 CC = gcc
 

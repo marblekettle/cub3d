@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/20 15:57:23 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/30 12:47:43 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/20 15:57:23 by brendan       #+#    #+#                 */
+/*   Updated: 2020/06/05 15:22:34 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,50 @@ static char		check_prefix_walltex(char **split, t_map *map, t_world *world)
 	return (0);
 }
 
+static void		process_sprite(const char *file, t_world *world)
+{
+	t_objtype	*type;
+	t_texture	*sprite;
+	char		*name;
+
+	name = texture_name(file);
+	sprite = (t_texture *)ft_lstfind(name, world->l_textures)->content;
+	free(name);
+	if (!sprite)
+		sprite = load_texture(world, file);
+	type = malloc(sizeof(t_objtype));
+	if (!type)
+		error_throw("Out of memory", world, NULL, NULL);
+	
+}
+
 static char		check_prefix_other(char **split, t_map *map, t_world *world)
 {
 	if (!ft_strncmp(split[0], "R", 2) && ft_arraysize(split) == 3)
 	{
 		world->win_w = ft_atoi(split[1]);
 		world->win_h = ft_atoi(split[2]);
-		return('R');
+		return ('R');
 	}
 	else if (!ft_strncmp(split[0], "F", 2) && ft_arraysize(split) == 2)
 	{
 		map->fl_color = str_to_color(split[1]);
-		return('F');
+		return ('F');
 	}
 	else if (!ft_strncmp(split[0], "C", 2) && ft_arraysize(split) == 2)
 	{
 		map->cl_color = str_to_color(split[1]);
-		return('C');
+		return ('C');
 	}
 	else if (!ft_strncmp(split[0], "S", 2) && ft_arraysize(split) == 2)
 	{
+		process_sprite(split[1], world);
 		return ('s');
 	}
 	return (0);
 }
 
-char		    check_prefix(char *str, t_map *map, t_world *world)
+char			check_prefix(char *str, t_map *map, t_world *world)
 {
 	char	**split;
 	char	ret;
