@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/05 15:30:38 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/10 11:35:54 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct		s_ray
 t_texture			*load_texture(t_world *world, const char *file);
 void				clear_texture(t_world *world, t_texture *texture);
 void				clear_texture_list(t_world *world, t_list *lst);
+char				*texture_name(const char *file);
 void				process_texture_data(t_texture *texture, t_world *world);
 void				world_end(void *world);
 void				error_throw(const char *err, t_world *world, \

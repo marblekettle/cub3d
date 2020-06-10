@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:20:58 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/05 13:30:31 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/10 15:37:50 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,31 @@ static void		parse_file(int fd, t_map *map, \
 		error_throw("Invalid map layout", world, map, NULL);
 }
 
+static void		process_objs(t_map *map, t_world *world)
+{
+	int		spot[2];
+	t_list	*objlist;
+
+	ft_bzero(spot, 8);
+	while ((map->map)[spot[1]])
+	{
+		while ((map->map)[spot[0]])
+		{
+			if (!ft_strchr(" 01NSWE", (map->map)[spot[1]][spot[0]]))
+			{
+				objlist = world->l_objtypes;
+				while (objlist)
+				{
+					if ((t_objtype *)(objlist->content)
+						
+				}
+			}
+			spot[0]++;
+		}
+		spot[1]++;
+	}
+}
+
 static void		process_map(t_map *map, t_world *world)
 {
 	int		spot[2];
@@ -112,6 +137,7 @@ static void		process_map(t_map *map, t_world *world)
 		if (found == 'E' || found == 'W')
 			map->init_dir[0] = (found == 'E') ? 1.0 : -1.0;
 	}
+	process_objs(map, world);
 }
 
 t_map			*load_map(char *file, t_world *world)

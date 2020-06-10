@@ -6,7 +6,7 @@
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/27 14:49:12 by bmans         #+#    #+#                  #
-#    Updated: 2020/06/05 13:20:35 by bmans         ########   odam.nl          #
+#    Updated: 2020/06/10 12:25:02 by bmans         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ linux:
 
 macos:
 	gcc $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) -I$(HEADER_DIR_MACOS) \
-	-L$(LIB_DIR) -L$(LIB_DIR_MACOS) -lft -lmlx -o $(NAME_OUT)
+	-L$(LIB_DIR) -L$(LIB_DIR_MACOS) -lft -lmlx -o $(NAME_OUT) -g
 
 clean:
 	rm $(NAME_OUT)

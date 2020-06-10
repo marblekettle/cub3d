@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 15:54:40 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/05 14:15:18 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/10 11:29:25 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 								void (*del)(void *));
+t_list				*ft_lstfind(const char *needle, t_list *haystack);
 
 void				ft_putnchar_fd(int c, size_t n, int fd);
 void				ft_lstprint(t_list *lst);

@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/20 15:57:23 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/05 15:22:34 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/10 13:15:08 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,29 @@ static void		process_sprite(const char *file, t_world *world)
 {
 	t_objtype	*type;
 	t_texture	*sprite;
+	t_list		*list;
 	char		*name;
 
 	name = texture_name(file);
-	sprite = (t_texture *)ft_lstfind(name, world->l_textures)->content;
-	free(name);
-	if (!sprite)
+	if (!name)
+		error_throw("Out of memory", world, NULL, NULL);
+	list = ft_lstfind(name, world->l_textures);
+	if (!list)
 		sprite = load_texture(world, file);
+	else
+		sprite = (t_texture *)list->content;
+	free(name);
+	sprite->trans = 0x0;
 	type = malloc(sizeof(t_objtype));
 	if (!type)
 		error_throw("Out of memory", world, NULL, NULL);
-	
+	type->id = '2';
+	type->rad = 0.5;
+	type->sprite = sprite;
+	list = ft_lstnew(type);
+	if (!list)
+		error_throw("Out of memory", world, type, NULL);
+	ft_lstadd_back(&(world->l_objtypes), list);
 }
 
 static char		check_prefix_other(char **split, t_map *map, t_world *world)

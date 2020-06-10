@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/03 14:15:37 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/27 13:53:31 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/10 12:18:54 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+void	lst_del(void *content)
+{
+	if (content)
+		free(content);
+}
 
 void	world_end(void *world)
 {
@@ -23,6 +29,8 @@ void	world_end(void *world)
 	{
 		world_ptr = (t_world *)world;
 		clear_texture_list(world_ptr, world_ptr->l_textures);
+		ft_lstclear(&(world_ptr->l_objtypes), &lst_del);
+		ft_lstclear(&(world_ptr->l_objs), &lst_del);
 		ft_arrayclear(&(world_ptr->map->map));
 		if (world_ptr->window)
 			mlx_destroy_window(world_ptr->mlx, world_ptr->window);

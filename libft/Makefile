@@ -5,8 +5,8 @@
 #                                                      +:+                     #
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
-#    Created: 2019/10/28 13:17:49 by bmans          #+#    #+#                 #
-#    Updated: 2020/03/09 14:19:30 by bmans         ########   odam.nl          #
+#    Created: 2019/10/28 13:17:49 by bmans         #+#    #+#                  #
+#    Updated: 2020/06/10 11:34:01 by bmans         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ ft_lstmap_bonus.c		ft_lstnew_bonus.c		ft_lstsize_bonus.c \
 ft_lstdel_plus.c	ft_lstpop_plus.c	ft_lstprint_plus.c	ft_iswhite_plus.c \
 ft_putchar_plus.c	ft_putstr_plus.c	ft_putendl_plus.c	ft_putnbr_plus.c \
 ft_putnchar_plus.c	ft_max_plus.c		ft_min_plus.c	\
-ft_putnchar_fd_plus.c	gnl.c
+ft_putnchar_fd_plus.c	gnl.c			ft_lstfind_plus.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
