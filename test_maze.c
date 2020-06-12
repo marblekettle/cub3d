@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 17:34:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/10 12:19:48 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/12 12:26:03 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 double	g_pi = 3.1415927;
 void	*g_mapwin = NULL;
 t_world	*g_mapworld = NULL;
-
 
 void	drawmapgrid(t_world *world)
 {
@@ -150,6 +149,7 @@ int		main(void)
 	ft_printf("World prepared\n");
 	prepare_window(world, "Labyrus vA0.01 - Powered by Loup3D");
 	ft_printf("Window prepared\n");
+	ft_lstprint(world->l_objs);
 	render(world);
 //	drawmap(world);
 	mlx_hook(world->window, 2, 1L << 0, &key_hook, world);

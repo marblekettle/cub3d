@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:20:58 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/10 15:37:50 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/12 12:32:17 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,18 @@ static void		process_objs(t_map *map, t_world *world)
 	{
 		while ((map->map)[spot[0]])
 		{
-			if (!ft_strchr(" 01NSWE", (map->map)[spot[1]][spot[0]]))
+			ft_printf("%d %d\n", spot[0], spot[1]);
+			if (!ft_strchr(" 01NSWE", (map->map)[spot[1]][spot[0]]) && (map->map)[spot[1]][spot[0]])
 			{
 				objlist = world->l_objtypes;
 				while (objlist)
 				{
-					if ((t_objtype *)(objlist->content)
-						
+					if (((t_objtype *)(objlist->content))->id == '2')
+					{
+						new_obj((t_objtype *)(objlist->content), spot, world);
+						break ;
+					}
+					objlist = objlist->next;
 				}
 			}
 			spot[0]++;

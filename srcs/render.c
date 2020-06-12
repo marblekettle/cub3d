@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/03 12:46:25 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/12 11:50:33 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ static int	color_select(int y, int tex_x, t_ray *ray, t_world *world)
 	int			tex_y;
 	t_texture	*tex;
 
-	tex = world->map->so_tex;
+	if (ray->side == 'N' || ray->side == 'S')
+		tex = ray->side == 'N' ? world->map->no_tex : world->map->so_tex;
+	else
+		tex = ray->side == 'W' ? world->map->we_tex : world->map->ea_tex;
 	tex_y = texture_y(y, ray->dist, tex, world);
 	if (tex_y < 0)
 		return (world->map->cl_color);
@@ -84,13 +87,18 @@ static int	color_select(int y, int tex_x, t_ray *ray, t_world *world)
 static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 {
 	t_texture	*screen;
-	int 		j;
+	t_texture	*walltex;
+	int			j;
 	double		height;
 	int			tex_x;
 
 	j = 0;
 	screen = world->screen;
-	tex_x = texture_x(ray, world->map->so_tex);
+	if (ray->side == 'N' || ray->side == 'S')
+		walltex = ray->side == 'N' ? world->map->no_tex : world->map->so_tex;
+	else
+		walltex = ray->side == 'W' ? world->map->we_tex : world->map->ea_tex;
+	tex_x = texture_x(ray, walltex);
 	while (j < world->win_h)
 	{
 		world->screen->imgdata[i] = color_select(j, tex_x, ray, world);

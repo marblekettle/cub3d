@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/20 12:13:15 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/22 02:40:10 by brendan       ########   odam.nl         */
+/*   Created: 2020/03/20 12:13:15 by brendan       #+#    #+#                 */
+/*   Updated: 2020/06/12 12:16:24 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	draw_line_pixels(int *point, int *coef, int col, t_world *world)
 	err = 0;
 	vert = abs_int(coef[1]) > abs_int(coef[0]) ? 1 : 0;
 	if (vert)
-		delta = (double)(coef[0]) / (double)coef[1]; 
+		delta = (double)(coef[0]) / (double)coef[1];
 	else
 		delta = (double)(coef[1]) / (double)coef[0];
 	while (point[0] != point[2])

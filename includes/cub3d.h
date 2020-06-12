@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/10 11:35:54 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/12 13:14:10 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void				vec2_rot(double *out, double *in, double r, double theta);
 
 void				prepare_window(t_world *world, const char *name);
 void				render(t_world *world);
+
+void				new_obj(t_objtype *objtype, int *pos, t_world *world);
 
 void				swap_int(int *a, int *b);
 int	    			abs_int(int num);
