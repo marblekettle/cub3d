@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/12 13:14:10 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/16 10:39:28 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void				ft_arraypush_back(char ***arr, char *new);
 size_t				ft_arraysize(char **arr);
 void				ft_arrayclear(char ***arr);
 char				ft_arrayfind(int *spot, char *term, char **arr);
+int					**ft_arraysearch(char term, char **arr);
 
 t_map				*load_map(char *file, t_world *world);
 char			    check_prefix(char *str, t_map *map, t_world *world);

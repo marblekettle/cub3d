@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 17:34:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/12 12:26:03 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/16 13:22:45 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int		main(void)
 	t_world	*world;
 	t_map	*map;
 	t_obj	*player;
+	t_list	*list;
 
 	world = world_init();
 /*	g_mapwin = mlx_new_window(world->mlx, 400, 400, "map");
@@ -149,7 +150,12 @@ int		main(void)
 	ft_printf("World prepared\n");
 	prepare_window(world, "Labyrus vA0.01 - Powered by Loup3D");
 	ft_printf("Window prepared\n");
-	ft_lstprint(world->l_objs);
+	list = world->l_objs;
+	while (list)
+	{
+		ft_printf("%d %d\n", (int)((t_obj *)(list->content))->pos[0], (int)((t_obj *)(list->content))->pos[1]);
+		list = list->next;
+	}
 	render(world);
 //	drawmap(world);
 	mlx_hook(world->window, 2, 1L << 0, &key_hook, world);

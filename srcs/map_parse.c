@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:20:58 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/12 12:32:17 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/16 13:13:51 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,31 +96,24 @@ static void		parse_file(int fd, t_map *map, \
 
 static void		process_objs(t_map *map, t_world *world)
 {
-	int		spot[2];
-	t_list	*objlist;
+	int			**spotlist;
+	t_list		*objlist;
+	t_objtype	*type;
+	int			i;
 
-	ft_bzero(spot, 8);
-	while ((map->map)[spot[1]])
+	objlist = world->l_objtypes;
+	while (objlist)
 	{
-		while ((map->map)[spot[0]])
+		type = (t_objtype *)(objlist->content);
+		spotlist = ft_arraysearch(type->id, map->map);
+		i = 0;
+		while (spotlist[i])
 		{
-			ft_printf("%d %d\n", spot[0], spot[1]);
-			if (!ft_strchr(" 01NSWE", (map->map)[spot[1]][spot[0]]) && (map->map)[spot[1]][spot[0]])
-			{
-				objlist = world->l_objtypes;
-				while (objlist)
-				{
-					if (((t_objtype *)(objlist->content))->id == '2')
-					{
-						new_obj((t_objtype *)(objlist->content), spot, world);
-						break ;
-					}
-					objlist = objlist->next;
-				}
-			}
-			spot[0]++;
+			new_obj(type, spotlist[i], world);
+			i++;
 		}
-		spot[1]++;
+		ft_arrayclear((char ***)(&spotlist));
+		objlist = objlist->next;
 	}
 }
 
