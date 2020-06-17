@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/12 11:50:33 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/17 14:09:16 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void		render(t_world *world)
 		x = (double)(i - (world->win_w / 2)) / (double)(world->win_h);
 		vec2_rot(raydir + 2, world->player->dir, 1.0, atan(x));
 		cast_ray(raydir, &ray, world);
-		ray.dist /= sqrt(1 + (x * x)); //fisheye correction
+		ray.dist /= sqrt(1 + (x * x));
 		render_column(i, &ray, world);
 		i++;
 	}

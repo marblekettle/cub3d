@@ -3,17 +3,17 @@
 /*                                                        ::::::::            */
 /*   vec2.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: brendan <brendan@student.codam.nl>           +#+                     */
+/*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/30 12:41:26 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/30 12:44:41 by brendan       ########   odam.nl         */
+/*   Created: 2020/06/17 14:07:19 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/17 14:07:29 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <math.h>
 
-void 	vec2_join(int *vecout, int *vec1, int *vec2)
+void	vec2_join(int *vecout, int *vec1, int *vec2)
 {
 	int	newvec[4];
 

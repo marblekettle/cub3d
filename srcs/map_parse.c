@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:20:58 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/16 13:13:51 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/17 13:55:41 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,13 @@ static void		parse_file(int fd, t_map *map, \
 				free(line);
 				ret = (char)get_next_line(fd, &line);
 			}
-			break ;
 		}
 		free(line);
 	}
 	if (!map->map)
-		error_throw("Map error", world, map, NULL);
+		error_throw("Map error", world, NULL, NULL);
 	if (!check_map(map->map))
-		error_throw("Invalid map layout", world, map, NULL);
+		error_throw("Invalid map layout", world, NULL, NULL);
 }
 
 static void		process_objs(t_map *map, t_world *world)

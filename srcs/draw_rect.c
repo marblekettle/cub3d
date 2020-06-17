@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   draw_rect.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: brendan <brendan@student.codam.nl>           +#+                     */
+/*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/17 16:23:49 by brendan        #+#    #+#                */
-/*   Updated: 2020/03/22 02:30:41 by brendan       ########   odam.nl         */
+/*   Created: 2020/06/17 14:04:54 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/17 14:04:56 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

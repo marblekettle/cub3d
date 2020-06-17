@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/27 00:33:17 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/10 11:56:35 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/17 11:51:13 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void		clear_texture_list(t_world *world, t_list *lst)
 	{
 		clear_texture_list(world, lst->next);
 		clear_texture(world, (t_texture *)lst->content);
+		free(lst);
 	}
 }

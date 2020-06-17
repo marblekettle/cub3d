@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/20 15:57:23 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/10 13:15:08 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/17 10:41:23 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int		str_to_color(char *str)
 	rgb[0] = ft_atoi(split[0]);
 	rgb[1] = ft_atoi(split[1]);
 	rgb[2] = ft_atoi(split[2]);
+	ft_arrayclear(&split);
 	return (rgb[2] + (rgb[1] << 8) + (rgb[0] << 16));
 }
 
