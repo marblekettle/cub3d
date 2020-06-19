@@ -6,12 +6,21 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/17 14:07:19 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/17 14:07:29 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/19 12:59:39 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <math.h>
+
+double	vec2_dist(double *vec1, double *vec2)
+{
+	double	delta[2];
+
+	delta[0] = vec1[0] - vec2[0];
+	delta[1] = vec1[1] - vec2[1];
+	return (sqrt((delta[0] * delta[0]) + (delta[1] * delta[1])));
+}
 
 void	vec2_join(int *vecout, int *vec1, int *vec2)
 {
