@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/17 14:10:40 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/22 14:35:48 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	lst_del(void *content)
 		free(content);
 }
 
-void	world_end(void *world)
+void	world_end(t_world *world_ptr)
 {
-	t_world *world_ptr;
-
-	if (world != NULL)
+	if (world_ptr)
 	{
-		world_ptr = (t_world *)world;
 		clear_texture_list(world_ptr, world_ptr->l_textures);
 		ft_lstclear(&(world_ptr->l_objtypes), &lst_del);
 		ft_lstclear(&(world_ptr->l_objs), &lst_del);
 		ft_arrayclear(&(world_ptr->map->map));
 		if (world_ptr->window)
 			mlx_destroy_window(world_ptr->mlx, world_ptr->window);
-		if (world_ptr->screen)
-			clear_texture(world_ptr, world_ptr->screen);
-		free(world_ptr);
+		if (world_ptr->screen[0])
+			clear_texture(world_ptr, world_ptr->screen[0]);
+		if (world_ptr->screen[1])
+			clear_texture(world_ptr, world_ptr->screen[1]);
+//		if (world_ptr->screen[2])
+//			clear_texture(world_ptr, world_ptr->screen[2]);
 	}
 }
 
@@ -52,19 +52,19 @@ void	error_throw(const char *err, t_world *world, \
 	exit(0);
 }
 
-t_world	*world_init(void)
+void	world_init(t_world *world)
 {
-	t_world *world;
+//	t_world *world;
 
-	world = malloc(sizeof(t_world));
-	if (!world)
-		error_throw("Out of memory", world, NULL, NULL);
-	else
-	{
+//	world = malloc(sizeof(t_world));
+//	if (!world)
+//		error_throw("Out of memory", world, NULL, NULL);
+//	else
+//	{
 		ft_bzero(world, sizeof(t_world));
 		world->mlx = mlx_init();
 		if (!world->mlx)
 			error_throw("Could not initialize MiniLibX", world, NULL, NULL);
-	}
-	return (world);
+//	}
+//	return (world);
 }

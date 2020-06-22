@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/19 13:09:39 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/22 14:28:05 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ typedef	struct	s_objtype
 	t_texture	*sprite;
 }				t_objtype;
 
-typedef struct		s_obj
+typedef struct	s_obj
 {
 	double		pos[2];
 	double		dir[2];
-	double		dist;
+	double		relpos[2];
 	t_objtype	*type;
 }				t_obj;
 
@@ -64,13 +64,13 @@ typedef struct	s_world
 	void		*window;
 	int			win_w;
 	int			win_h;
-	t_texture	*screen;
+	t_texture	*screen[3];
 	t_list		*l_textures;
 	t_list		*l_objtypes;
 	t_list		*l_objs;
 	t_map		*map;
 	t_obj		*player;
-}					t_world;
+}				t_world;
 
 typedef struct	s_ray
 {
@@ -86,10 +86,10 @@ void			clear_texture(t_world *world, t_texture *texture);
 void			clear_texture_list(t_world *world, t_list *lst);
 char			*texture_name(const char *file);
 void			process_texture_data(t_texture *texture, t_world *world);
-void			world_end(void *world);
+void			world_end(t_world *world);
 void			error_throw(const char *err, t_world *world, \
 							void *tofree, const char *file);
-t_world			*world_init(void);
+void			world_init(t_world *world);
 char			**ft_makearray(size_t len, ...);
 void			ft_arraypush_front(char ***arr, char *new);
 void			ft_arraypush_back(char ***arr, char *new);
@@ -119,5 +119,7 @@ void			new_obj(t_objtype *objtype, int *pos, t_world *world);
 void			swap_int(int *a, int *b);
 int	    		abs_int(int num);
 double			sign(double num);
+
+void			obj_relpos(t_world *world);
 
 #endif

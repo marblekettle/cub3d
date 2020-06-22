@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/17 14:50:04 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/22 14:03:01 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,12 @@ static int	color_select(int y, int tex_x, t_ray *ray, t_world *world)
 
 static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 {
-	t_texture	*screen;
 	t_texture	*walltex;
 	int			j;
 	double		height;
 	int			tex_x;
 
 	j = 0;
-	screen = world->screen;
 	if (ray->side == 'N' || ray->side == 'S')
 		walltex = ray->side == 'N' ? world->map->no_tex : world->map->so_tex;
 	else
@@ -101,9 +99,9 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 	tex_x = texture_x(ray, walltex);
 	while (j < world->win_h)
 	{
-		world->screen->imgdata[i] = color_select(j, tex_x, ray, world);
+		(world->screen[0])->imgdata[i] = color_select(j, tex_x, ray, world);
 		j++;
-		i += world->screen->linesize;
+		i += (world->screen[0])->linesize;
 	}
 }
 
@@ -126,5 +124,5 @@ void		render(t_world *world)
 		i++;
 	}
 	mlx_put_image_to_window(world->mlx, world->window, \
-							world->screen->img, 0, 0);
+							(world->screen[0])->img, 0, 0);
 }

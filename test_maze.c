@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 17:34:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/17 14:21:46 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/22 14:15:40 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		key_hook(int keycode, void *world_ptr)
 		world->player->pos[1] += world->player->dir[1] * 0.05;
 	}
 //	drawmap(world);
+	obj_relpos(world);
 	render(world);
 	return (0);
 }
@@ -129,39 +130,40 @@ int		key_hook(int keycode, void *world_ptr)
 
 int		main(void)
 {
-	t_world	*world;
+	t_world	world;
 	t_map	*map;
 	t_obj	*player;
 	t_list	*list;
 
-	world = world_init();
+	world_init(&world);
 /*	g_mapwin = mlx_new_window(world->mlx, 400, 400, "map");
 	g_mapworld = malloc(sizeof(t_world));
 	g_mapworld->mlx = world->mlx;
 	g_mapworld->window = g_mapwin; */
 	ft_printf("Init successful\n");
-	map = load_map("./test.cub", world);
+	map = load_map("./test.cub", &world);
 	ft_printf("Map load successful\n");
 //	printf("%s\n", world->map->so_tex->name);
 	player = malloc(sizeof(t_obj));
-	ft_memcpy(player->pos, world->map->init_pos, 16);
-	ft_memcpy(player->dir, world->map->init_dir, 16);
-	world->player = player;
+	ft_memcpy(player->pos, world.map->init_pos, 16);
+	ft_memcpy(player->dir, world.map->init_dir, 16);
+	world.player = player;
 	ft_printf("World prepared\n");
-	prepare_window(world, "Labyrus vA0.01 - Powered by Loup3D");
+	prepare_window(&world, "Labyrus vA0.01 - Powered by Loup3D");
 	ft_printf("Window prepared\n");
-	list = world->l_objs;
+	list = world.l_objs;
 /*	while (list)
 	{
 		ft_printf("%d %d\n", (int)((t_obj *)(list->content))->pos[0], (int)((t_obj *)(list->content))->pos[1]);
 		list = list->next;
 	} */
-	render(world);
+	obj_relpos(&world);
+	render(&world);
 //	drawmap(world);
-	mlx_hook(world->window, 2, 1L << 0, &key_hook, world);
-	mlx_hook(world->window, 17, 0L, &shutdown, world);
+	mlx_hook(world.window, 2, 1L << 0, &key_hook, &world);
+	mlx_hook(world.window, 17, 0L, &shutdown, &world);
 //	mlx_key_hook(world->window, &key_hook, world);
 //	mlx_loop_hook(world->mlx, &loop_hook, world);
-	mlx_loop(world->mlx);
+	mlx_loop(world.mlx);
 	return (0);
 }
