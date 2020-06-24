@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/19 12:54:35 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/22 15:23:06 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/23 12:31:37 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,4 @@ void	obj_relpos(t_world *world)
 		list = list->next;
 	}
 	printf("\n");
-}
-
-void	sort_objs(t_world *world)
-{
-
 }
