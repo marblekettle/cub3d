@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/22 14:28:05 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/24 13:30:18 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,8 @@ int	    		abs_int(int num);
 double			sign(double num);
 
 void			obj_relpos(t_world *world);
+void			render_sprites(t_world *world, double *distarr);
+void			ft_lstsort(t_list *list, double (*crit)(t_list *));
+void			screen_overlay(t_texture *bot_screen, t_texture *top_screen);
 
 #endif

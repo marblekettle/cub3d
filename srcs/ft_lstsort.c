@@ -6,16 +6,11 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/23 12:32:23 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/24 08:04:38 by brendan       ########   odam.nl         */
+/*   Updated: 2020/06/24 10:20:09 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-double		get_first_letter(t_list *list)
-{
-	return (*((char *)(list->content)))
-}
 
 static void	lstswap(t_list *list1, t_list *list2)
 {
@@ -32,7 +27,6 @@ static void	lstsortiter(t_list *list, double (*crit)(t_list *))
 		lstsortiter(list->next, crit);
 	if (crit(list) > crit(list->next))
 		lstswap(list, list->next);
-	
 }
 
 void		ft_lstsort(t_list *list, double (*crit)(t_list *))

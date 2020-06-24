@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/22 14:03:01 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/24 15:09:11 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,15 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 void		render(t_world *world)
 {
 	t_ray	ray;
+	double	*distarr;
 	double	raydir[4];
 	int		i;
 	double	x;
 
 	ft_memcpy(raydir, world->player->pos, 16);
+	distarr = malloc(sizeof(double) * world->win_w);
+	if (!distarr)
+		error_throw("Out of memory", world, NULL, NULL);
 	i = 0;
 	while (i < world->win_w)
 	{
@@ -120,9 +124,12 @@ void		render(t_world *world)
 		vec2_rot(raydir + 2, world->player->dir, 1.0, atan(x));
 		cast_ray(raydir, &ray, world);
 		ray.dist /= sqrt(1 + (x * x));
+		distarr[i] = ray.dist;
 		render_column(i, &ray, world);
 		i++;
 	}
 	mlx_put_image_to_window(world->mlx, world->window, \
 							(world->screen[0])->img, 0, 0);
+	render_sprites(world, distarr);
+	free(distarr);
 }

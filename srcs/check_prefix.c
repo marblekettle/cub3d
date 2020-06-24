@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/20 15:57:23 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/17 10:41:23 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/24 15:52:56 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void		process_sprite(const char *file, t_world *world)
 	else
 		sprite = (t_texture *)list->content;
 	free(name);
-	sprite->trans = 0x0;
+	sprite->trans = 0xFFFF;
 	type = malloc(sizeof(t_objtype));
 	if (!type)
 		error_throw("Out of memory", world, NULL, NULL);
