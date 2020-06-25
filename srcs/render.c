@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/25 14:15:12 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:29:16 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	texture_y(int j, double dist, t_texture *tex, t_world *world)
 **	}
 */
 
-static int	color_select(int y, int tex_x, t_ray *ray, t_world *world)
+/*  static int	color_select(int y, int tex_x, t_ray *ray, t_world *world)
 {
 	int			tex_y;
 	t_texture	*tex;
@@ -78,14 +78,18 @@ static int	color_select(int y, int tex_x, t_ray *ray, t_world *world)
 	else if (tex_y >= tex->height)
 		return (world->map->fl_color);
 	else
+
+	if (tex_y >= 0 && tex_y < tex->height)
 		return (tex->imgdata[tex_x + (tex_y * tex->linesize)]);
-}
+} */
 
 static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 {
 	t_texture	*walltex;
 	int			j;
 	int			tex_x;
+	int			tex_y;
+	int			color;
 
 	j = 0;
 	if (ray->side == 'N' || ray->side == 'S')
@@ -95,7 +99,12 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 	tex_x = texture_x(ray, walltex);
 	while (j < world->win_h)
 	{
-		world->screen.imgdata[i] = color_select(j, tex_x, ray, world);
+		tex_y = texture_y(j, ray->dist, walltex, world);
+		if (tex_y >= 0 && tex_y < walltex->height)
+		{
+			color = walltex->imgdata[tex_x + (tex_y * walltex->linesize)];
+			world->screen.imgdata[i] = color;
+		}
 		j++;
 		i += world->screen.linesize;
 	}
