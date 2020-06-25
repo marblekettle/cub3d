@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/24 15:39:17 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/17 14:50:11 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:15:20 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "libft.h"
 #include "mlx.h"
 #include <math.h>
-
-#include <stdio.h>
 
 static double	jump_val(double num, char align, char vert)
 {
@@ -53,9 +51,9 @@ static char		check_mappoint(int *point, t_map *map)
 {
 	if (point[0] < 0 || point[1] < 0)
 		return (' ');
-	if (point[1] >= ft_arraysize(map->map))
+	if ((size_t)point[1] >= ft_arraysize(map->map))
 		return (' ');
-	if (point[0] >= ft_strlen(map->map[point[1]]))
+	if ((size_t)point[0] >= ft_strlen(map->map[point[1]]))
 		return (' ');
 	return (map->map[point[1]][point[0]]);
 }

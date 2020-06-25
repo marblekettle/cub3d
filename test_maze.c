@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 17:34:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/22 14:15:40 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 12:02:42 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	g_pi = 3.1415927;
 void	*g_mapwin = NULL;
 t_world	*g_mapworld = NULL;
 
-void	drawmapgrid(t_world *world)
+/*void	drawmapgrid(t_world *world)
 {
 	int		i;
 	int		j;
@@ -83,7 +83,7 @@ void	drawmap(t_world *world)
 	draw_rect(playpnt, playpnt + 2, 0xFF0000, g_mapworld);
 	draw_rect(raypnt, raypnt + 2, 0xFF0000, g_mapworld);
 	free(ray);
-}
+} */
 
 int		shutdown(void *world)
 {

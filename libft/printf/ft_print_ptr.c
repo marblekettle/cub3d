@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_print_ptr.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: bmans <marvin@codam.nl>                      +#+                     */
+/*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/13 15:51:07 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/27 13:28:40 by brendan       ########   odam.nl         */
+/*   Created: 2020/06/25 13:58:55 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/25 13:59:21 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_print_ptr(t_print *print)
 {
-	U_LL	ptr;
-	char	*tpstr;
-	char	*pstr;
+	u_int64_t	ptr;
+	char		*tpstr;
+	char		*pstr;
 
-	ptr = va_arg(print->ap, U_LL);
+	ptr = va_arg(print->ap, u_int64_t);
 	pstr = NULL;
 	tpstr = ft_itoa_base_prec(ptr, "0123456789abcdef", print->prec);
 	if (tpstr)

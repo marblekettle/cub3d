@@ -6,13 +6,12 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/22 14:35:48 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:15:03 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 void	lst_del(void *content)
@@ -21,22 +20,18 @@ void	lst_del(void *content)
 		free(content);
 }
 
-void	world_end(t_world *world_ptr)
+void	world_end(t_world *world)
 {
-	if (world_ptr)
+	if (world)
 	{
-		clear_texture_list(world_ptr, world_ptr->l_textures);
-		ft_lstclear(&(world_ptr->l_objtypes), &lst_del);
-		ft_lstclear(&(world_ptr->l_objs), &lst_del);
-		ft_arrayclear(&(world_ptr->map->map));
-		if (world_ptr->window)
-			mlx_destroy_window(world_ptr->mlx, world_ptr->window);
-		if (world_ptr->screen[0])
-			clear_texture(world_ptr, world_ptr->screen[0]);
-		if (world_ptr->screen[1])
-			clear_texture(world_ptr, world_ptr->screen[1]);
-//		if (world_ptr->screen[2])
-//			clear_texture(world_ptr, world_ptr->screen[2]);
+		clear_texture_list(world, world->l_textures);
+		ft_lstclear(&(world->l_objtypes), &lst_del);
+		ft_lstclear(&(world->l_objs), &lst_del);
+		ft_arrayclear(&(world->map->map));
+		if (world->window)
+			mlx_destroy_window(world->mlx, world->window);
+		if (world->screen.img)
+			mlx_destroy_image(world->mlx, world->screen.img);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/26 21:44:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/05 13:39:58 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:14:44 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "mlx.h"
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdio.h>
 
 static void	*open_texture(t_world *world, char *file, t_texture *texture)
 {
@@ -25,6 +24,8 @@ static void	*open_texture(t_world *world, char *file, t_texture *texture)
 	int		fd;
 
 	img = NULL;
+	width = 0;
+	height = 0;
 	fd = open(file, O_RDWR);
 	if (fd < 0)
 		error_throw("File not found: %s", world, NULL, file);
@@ -51,7 +52,7 @@ void		process_texture_data(t_texture *texture, t_world *world)
 	imgdata = mlx_get_data_addr(img, &bits_pp, &linesize, &(texture->endian));
 	if (!imgdata)
 		error_throw("Could not process screen data", world, img, NULL);
-	texture->imgdata = (U_INT *)imgdata;
+	texture->imgdata = (u_int32_t *)imgdata;
 	texture->bytes_pp = bits_pp / 8;
 	texture->linesize = linesize / texture->bytes_pp;
 }
@@ -78,9 +79,6 @@ t_texture	*load_texture(t_world *world, const char *file)
 {
 	t_texture	*tex;
 	void		*img;
-	char		*imgdata;
-	int			linesize;
-	int			bits_pp;
 
 	tex = malloc(sizeof(t_texture));
 	if (!tex)

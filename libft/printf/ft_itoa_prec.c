@@ -6,13 +6,13 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/13 15:35:55 by bmans         #+#    #+#                 */
-/*   Updated: 2020/01/13 15:35:56 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:01:29 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static U_INT	ft_digitcount(int n)
+static u_int32_t	ft_digitcount(int n)
 {
 	unsigned int digits;
 
@@ -25,7 +25,7 @@ static U_INT	ft_digitcount(int n)
 	return (digits);
 }
 
-char			*ft_itoa_prec(int n, int prec)
+char				*ft_itoa_prec(int n, int prec)
 {
 	char			*a;
 	unsigned int	digits;
@@ -35,7 +35,7 @@ char			*ft_itoa_prec(int n, int prec)
 		return (ft_strdup(""));
 	neg = (n < 0);
 	digits = ft_digitcount(n);
-	if (digits < (U_INT)prec && prec != -1)
+	if (digits < (u_int32_t)prec && prec != -1)
 		digits = prec;
 	digits += (neg ? 1 : 0);
 	a = malloc(sizeof(char) * (digits + 1));

@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_print_int.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: bmans <marvin@codam.nl>                      +#+                     */
+/*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/13 15:51:12 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/27 13:28:35 by brendan       ########   odam.nl         */
+/*   Created: 2020/06/25 13:59:34 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/25 13:59:36 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

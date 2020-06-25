@@ -6,14 +6,14 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/06 14:55:31 by bmans         #+#    #+#                 */
-/*   Updated: 2019/12/06 14:55:32 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:02:14 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static U_INT	ft_digitcount_base(U_INT n, U_INT base)
+static u_int32_t	ft_digitcount_base(u_int32_t n, u_int32_t base)
 {
 	unsigned int digits;
 
@@ -26,10 +26,10 @@ static U_INT	ft_digitcount_base(U_INT n, U_INT base)
 	return (digits);
 }
 
-char			*ft_itoa_base(U_INT n, U_INT base, char *basedigits)
+char				*ft_itoa_base(u_int32_t n, u_int32_t base, char *basedigits)
 {
-	char	*a;
-	U_INT	digits;
+	char		*a;
+	u_int32_t	digits;
 
 	if (base < 2 || ft_strlen(basedigits) != base)
 		return (ft_strdup(""));
@@ -41,7 +41,7 @@ char			*ft_itoa_base(U_INT n, U_INT base, char *basedigits)
 		while (digits > 0)
 		{
 			digits--;
-			a[digits] = basedigits[(U_INT)(n % base)];
+			a[digits] = basedigits[(u_int32_t)(n % base)];
 			n = (n / base);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_printf.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: bmans <marvin@codam.nl>                      +#+                     */
+/*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/13 16:10:14 by bmans          #+#    #+#                */
-/*   Updated: 2020/03/27 13:27:45 by brendan       ########   odam.nl         */
+/*   Created: 2020/06/25 13:58:36 by bmans         #+#    #+#                 */
+/*   Updated: 2020/06/25 14:00:48 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,5 @@ int					ft_printf_fd(int fd, const char *format, ...)
 			return (-1);
 	}
 	va_end(print.ap);
-	return (print.len);	
+	return (print.len);
 }

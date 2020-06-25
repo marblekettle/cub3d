@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/13 15:40:54 by bmans         #+#    #+#                 */
-/*   Updated: 2020/01/13 15:40:55 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 13:58:08 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	fix_exceptions(char *str, t_print *print)
 
 char		*ft_print_resize(char *str, t_print *print)
 {
-	U_INT	size;
-	char	*newstr;
+	u_int32_t	size;
+	char		*newstr;
 
 	newstr = malloc(sizeof(char) * (print->width + 1));
 	if (newstr)

@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/24 13:30:18 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 13:53:59 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ typedef struct	s_texture
 	int			height;
 	int			bytes_pp;
 	int			endian;
-	int			trans;
+	u_int32_t	trans;
 	void		*img;
-	U_INT		*imgdata;
+	u_int32_t	*imgdata;
 }				t_texture;
 
 typedef struct	s_map
@@ -64,7 +64,7 @@ typedef struct	s_world
 	void		*window;
 	int			win_w;
 	int			win_h;
-	t_texture	*screen[3];
+	t_texture	screen;
 	t_list		*l_textures;
 	t_list		*l_objtypes;
 	t_list		*l_objs;
@@ -117,12 +117,11 @@ void			render(t_world *world);
 void			new_obj(t_objtype *objtype, int *pos, t_world *world);
 
 void			swap_int(int *a, int *b);
-int	    		abs_int(int num);
+int				abs_int(int num);
 double			sign(double num);
 
 void			obj_relpos(t_world *world);
 void			render_sprites(t_world *world, double *distarr);
 void			ft_lstsort(t_list *list, double (*crit)(t_list *));
-void			screen_overlay(t_texture *bot_screen, t_texture *top_screen);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/27 14:49:12 by bmans         #+#    #+#                  #
-#    Updated: 2020/06/10 12:25:02 by bmans         ########   odam.nl          #
+#    Updated: 2020/06/25 11:14:20 by bmans         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,18 +20,21 @@ LIB_DIR_LINUX = minilibx/linux
 LIB_DIR_MACOS = .
 LIB_DIR = libft
 CC = gcc
+FLAGS = -Wall -Wextra -Werror
 
 libft:
 	make -C $(LIB_DIR)
 	make -C $(LIB_DIR) clean
 
 linux:
-	gcc $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) -I$(HEADER_DIR_LINUX) \
-	-L$(LIB_DIR) -L$(LIB_DIR_LINUX) -lft -lmlx -lm -lX11 -lXext -o $(NAME_OUT)
+	gcc $(FLAGS) $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) \
+	-I$(HEADER_DIR_LINUX) -L$(LIB_DIR) -L$(LIB_DIR_LINUX) \
+	-lft -lmlx -lm -lX11 -lXext -o $(NAME_OUT)
 
 macos:
-	gcc $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) -I$(HEADER_DIR_MACOS) \
-	-L$(LIB_DIR) -L$(LIB_DIR_MACOS) -lft -lmlx -o $(NAME_OUT) -g
+	gcc $(FLAGS) $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) \
+	-I$(HEADER_DIR_MACOS) -L$(LIB_DIR) -L$(LIB_DIR_MACOS) \
+	-lft -lmlx -o $(NAME_OUT) -g
 
 clean:
 	rm $(NAME_OUT)

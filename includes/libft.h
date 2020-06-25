@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 15:54:40 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/10 11:29:25 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:14:01 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 # ifndef LONG_MAX
 #  define LONG_MAX 9223372036854775807
 # endif
-# ifndef U_INT
-#  define U_INT unsigned int
-# endif
 # include <stddef.h>
+# include <stdint.h>
 
 typedef struct		s_list
 {
@@ -87,7 +85,8 @@ void				ft_putnbr(int n);
 void				ft_putnchar(int c, size_t n);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
-char				*ft_itoa_base(U_INT n, U_INT base, char *basedigits);
+char				*ft_itoa_base(u_int32_t n, u_int32_t base, \
+									char *basedigits);
 int					get_next_line(int fd, char **line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/24 15:09:11 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:15:12 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "libft.h"
 #include "mlx.h"
 #include "math.h"
-
-#include <stdio.h>
 
 static int	texture_x(t_ray *ray, t_texture *tex)
 {
@@ -38,7 +36,6 @@ static int	texture_x(t_ray *ray, t_texture *tex)
 
 static int	texture_y(int j, double dist, t_texture *tex, t_world *world)
 {
-	double	h;
 	double	newj;
 
 	newj = j - ((world->win_h / 2) * (1 - (1 / dist)));
@@ -88,7 +85,6 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 {
 	t_texture	*walltex;
 	int			j;
-	double		height;
 	int			tex_x;
 
 	j = 0;
@@ -99,9 +95,9 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 	tex_x = texture_x(ray, walltex);
 	while (j < world->win_h)
 	{
-		(world->screen[0])->imgdata[i] = color_select(j, tex_x, ray, world);
+		world->screen.imgdata[i] = color_select(j, tex_x, ray, world);
 		j++;
-		i += (world->screen[0])->linesize;
+		i += world->screen.linesize;
 	}
 }
 
@@ -129,7 +125,7 @@ void		render(t_world *world)
 		i++;
 	}
 	mlx_put_image_to_window(world->mlx, world->window, \
-							(world->screen[0])->img, 0, 0);
+							world->screen.img, 0, 0);
 	render_sprites(world, distarr);
 	free(distarr);
 }

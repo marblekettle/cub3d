@@ -6,13 +6,12 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:20:58 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/17 14:49:54 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 14:15:27 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "cub3d.h"
-#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -24,7 +23,7 @@ static char		check_spot(char **map, int i, int j)
 		return (0);
 	if (!map[j][i - 1] || map[j][i - 1] == ' ')
 		return (0);
-	if (ft_strlen(map[j - 1]) <= i || ft_strlen(map[j + 1]) <= i)
+	if ((int)ft_strlen(map[j - 1]) <= i || (int)ft_strlen(map[j + 1]) <= i)
 		return (0);
 	if (!map[j + 1][i] || map[j + 1][i] == ' ')
 		return (0);
