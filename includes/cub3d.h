@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/29 10:29:00 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/29 14:11:22 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ char			ft_arrayfind(int *spot, char *term, char **arr);
 int				**ft_arraysearch(char term, char **arr);
 
 t_map			*load_map(char *file, t_world *world);
-char			check_prefix(char *str, t_map *map, t_world *world);
+char			check_prefix(char *str, t_map *map, t_world *world, \
+													char *file);
 
 void			draw_rect(int *ul_point, int *lr_point, int color, \
 													t_world *world);
@@ -127,6 +128,8 @@ char			check_map(char **map);
 
 void			new_obj(t_objtype *objtype, int *pos, t_world *world);
 void			move_player(t_world *world, char dir, double speed);
+
+void			save_bitmap(t_texture *image, t_world *world);
 
 void			swap_int(int *a, int *b);
 int				abs_int(int num);

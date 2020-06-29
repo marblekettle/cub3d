@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:20:58 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/29 10:04:47 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/29 14:14:51 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 static void		parse_file(int fd, t_map *map, \
-							t_world *world, const char *file)
+							t_world *world, char *file)
 {
 	char *line;
 	char ret;
@@ -27,7 +27,7 @@ static void		parse_file(int fd, t_map *map, \
 		ret = (char)get_next_line(fd, &line);
 		if (ret == -1)
 			error_throw("File error: %s", world, map, file);
-		if (ft_strlen(line) > 0 && !check_prefix(line, map, world))
+		if (ft_strlen(line) > 0 && !check_prefix(line, map, world, file))
 		{
 			while (ret || *line)
 			{
@@ -39,9 +39,9 @@ static void		parse_file(int fd, t_map *map, \
 		free(line);
 	}
 	if (!map->map)
-		error_throw("Map error", world, NULL, NULL);
+		error_throw("Map error: %s", world, NULL, file);
 	if (!check_map(map->map))
-		error_throw("Invalid map layout", world, NULL, NULL);
+		error_throw("Invalid map layou: %s", world, NULL, file);
 }
 
 static void		process_objs(t_map *map, t_world *world)

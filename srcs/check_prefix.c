@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/20 15:57:23 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/24 15:52:56 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/29 14:16:02 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "mlx.h"
 
-static int		str_to_color(char *str)
+static int		str_to_color(char *str, t_world *world, char *file)
 {
 	char	**split;
 	int		rgb[3];
@@ -26,6 +26,8 @@ static int		str_to_color(char *str)
 	rgb[1] = ft_atoi(split[1]);
 	rgb[2] = ft_atoi(split[2]);
 	ft_arrayclear(&split);
+	if (rgb[0] < 0 || rgb[1] < 0 || rgb[2] < 0)
+		error_throw("Wrong color format", world, NULL, file);
 	return (rgb[2] + (rgb[1] << 8) + (rgb[0] << 16));
 }
 
@@ -83,7 +85,8 @@ static void		process_sprite(const char *file, t_world *world)
 	ft_lstadd_back(&(world->l_objtypes), list);
 }
 
-static char		check_prefix_other(char **split, t_map *map, t_world *world)
+static char		check_prefix_other(char **split, t_map *map, t_world *world, \
+																char *file)
 {
 	if (!ft_strncmp(split[0], "R", 2) && ft_arraysize(split) == 3)
 	{
@@ -93,12 +96,12 @@ static char		check_prefix_other(char **split, t_map *map, t_world *world)
 	}
 	else if (!ft_strncmp(split[0], "F", 2) && ft_arraysize(split) == 2)
 	{
-		map->fl_color = str_to_color(split[1]);
+		map->fl_color = str_to_color(split[1], world, file);
 		return ('F');
 	}
 	else if (!ft_strncmp(split[0], "C", 2) && ft_arraysize(split) == 2)
 	{
-		map->cl_color = str_to_color(split[1]);
+		map->cl_color = str_to_color(split[1], world, file);
 		return ('C');
 	}
 	else if (!ft_strncmp(split[0], "S", 2) && ft_arraysize(split) == 2)
@@ -109,7 +112,7 @@ static char		check_prefix_other(char **split, t_map *map, t_world *world)
 	return (0);
 }
 
-char			check_prefix(char *str, t_map *map, t_world *world)
+char			check_prefix(char *str, t_map *map, t_world *world, char *file)
 {
 	char	**split;
 	char	ret;
@@ -119,7 +122,7 @@ char			check_prefix(char *str, t_map *map, t_world *world)
 		error_throw("Out of memory", world, NULL, NULL);
 	ret = check_prefix_walltex(split, map, world);
 	if (!ret)
-		ret = check_prefix_other(split, map, world);
+		ret = check_prefix_other(split, map, world, file);
 	ft_arrayclear(&split);
 	return (ret);
 }
