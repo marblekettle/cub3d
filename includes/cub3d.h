@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/26 16:14:05 by brendan       ########   odam.nl         */
+/*   Updated: 2020/06/29 10:29:00 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,13 @@ void			vec2_rot(double *out, double *in, double r, double theta);
 
 void			prepare_window(t_world *world, const char *name);
 void			render(t_world *world);
+u_int32_t		*get_pixel(t_texture *tex, int *pixel);
+u_int32_t		*get_pixel_scaled(t_texture *tex, double *point);
+void			render_floor_ceiling(t_world *world);
+char			check_map(char **map);
 
 void			new_obj(t_objtype *objtype, int *pos, t_world *world);
+void			move_player(t_world *world, char dir, double speed);
 
 void			swap_int(int *a, int *b);
 int				abs_int(int num);

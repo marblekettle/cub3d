@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/26 16:43:35 by brendan       ########   odam.nl         */
+/*   Updated: 2020/06/29 10:07:01 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,44 +45,6 @@ static int	texture_y(int j, double dist, t_texture *tex, t_world *world)
 		return ((int)(tex->height * newj * dist / (double)world->win_h));
 }
 
-/*
-**	static int	darken(int color, double rate)
-**	{
-**	unsigned char	rgb[3];
-**	int				out;
-**
-**	if (rate < 2.0)
-**		return (color);
-**	rgb[0] = (color & 0xFF0000) >> 16;
-**	rgb[1] = (color & 0xFF00) >> 8;
-**	rgb[2] = (color & 0xFF);
-**	rgb[0] = (unsigned char)(rgb[0] * 2.0 / rate);
-**	rgb[1] = (unsigned char)(rgb[1] * 2.0 / rate);
-**	rgb[2] = (unsigned char)(rgb[2] * 2.0 / rate);
-**	return (rgb[2] + (rgb[1] << 8) + (rgb[0] << 16));
-**	}
-*/
-
-/*  static int	color_select(int y, int tex_x, t_ray *ray, t_world *world)
-{
-	int			tex_y;
-	t_texture	*tex;
-
-	if (ray->side == 'N' || ray->side == 'S')
-		tex = ray->side == 'N' ? world->map->no_tex : world->map->so_tex;
-	else
-		tex = ray->side == 'W' ? world->map->we_tex : world->map->ea_tex;
-	tex_y = texture_y(y, ray->dist, tex, world);
-	if (tex_y < 0)
-		return (world->map->cl_color);
-	else if (tex_y >= tex->height)
-		return (world->map->fl_color);
-	else
-
-	if (tex_y >= 0 && tex_y < tex->height)
-		return (tex->imgdata[tex_x + (tex_y * tex->linesize)]);
-} */
-
 static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 {
 	t_texture	*walltex;
@@ -110,50 +72,14 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 	}
 }
 
-void	render_floor_ceiling(t_world *world)
-{
-	int		pixel[2];
-	size_t	spot;
-
-	pixel[1] = 0;
-	while (pixel[1] < world->win_h / 2)
-	{
-		pixel[0] = 0;
-		while (pixel[0] < world->win_w)
-		{
-			spot = pixel[0] + (world->screen.linesize * pixel[1]);
-			world->screen.imgdata[spot] = world->map->cl_color;
-			pixel[0]++;
-		}
-		pixel[1]++;
-	}
-	while (pixel[1] < world->win_h)
-	{
-		pixel[0] = 0;
-		while (pixel[0] < world->win_w)
-		{
-			spot = pixel[0] + (world->screen.linesize * pixel[1]);
-			world->screen.imgdata[spot] = world->map->fl_color;
-			pixel[0]++;
-		}
-		pixel[1]++;
-	}
-}
-
-void		render(t_world *world)
+static void	render_walls(t_world *world, double *distarr)
 {
 	t_ray	ray;
-	double	*distarr;
 	double	raydir[4];
 	int		i;
 	double	x;
 
 	ft_memcpy(raydir, world->player.pos, 16);
-	distarr = malloc(sizeof(double) * world->win_w);
-	if (!distarr)
-		error_throw("Out of memory", world, NULL, NULL);
-	obj_relpos(world);
-	render_floor_ceiling(world);
 	i = 0;
 	while (i < world->win_w)
 	{
@@ -165,8 +91,22 @@ void		render(t_world *world)
 		render_column(i, &ray, world);
 		i++;
 	}
+}
+
+void		render(t_world *world)
+{
+	double	*distarr;
+
+	obj_relpos(world);
+	distarr = malloc(sizeof(double) * world->win_w);
+	if (!distarr)
+		error_throw("Out of memory", world, NULL, NULL);
+	render_floor_ceiling(world);
+	render_walls(world, distarr);
+	render_sprites(world, distarr);
+	mlx_sync(MLX_SYNC_IMAGE_WRITABLE, world->screen.img);
 	mlx_put_image_to_window(world->mlx, world->window, \
 							world->screen.img, 0, 0);
-	render_sprites(world, distarr);
+	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, world->window);
 	free(distarr);
 }

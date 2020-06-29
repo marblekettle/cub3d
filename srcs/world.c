@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/25 14:15:03 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/29 10:00:19 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,8 @@ void	error_throw(const char *err, t_world *world, \
 
 void	world_init(t_world *world)
 {
-//	t_world *world;
-
-//	world = malloc(sizeof(t_world));
-//	if (!world)
-//		error_throw("Out of memory", world, NULL, NULL);
-//	else
-//	{
-		ft_bzero(world, sizeof(t_world));
-		world->mlx = mlx_init();
-		if (!world->mlx)
-			error_throw("Could not initialize MiniLibX", world, NULL, NULL);
-//	}
-//	return (world);
+	ft_bzero(world, sizeof(t_world));
+	world->mlx = mlx_init();
+	if (!world->mlx)
+		error_throw("Could not initialize MiniLibX", world, NULL, NULL);
 }

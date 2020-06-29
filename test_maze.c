@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 17:34:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/26 16:44:00 by brendan       ########   odam.nl         */
+/*   Updated: 2020/06/29 09:02:56 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int		main(void)
 //	mlx_key_hook(world->window, &key_hook, world);
 //	mlx_loop_hook(world->mlx, &loop_hook, world);
 	prepare_loop_hooks(&world);
+	render(&world);
 	mlx_loop(world.mlx);
 	return (0);
 }
