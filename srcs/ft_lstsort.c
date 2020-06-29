@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/23 12:32:23 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/24 10:20:09 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/26 15:08:53 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void		ft_lstsort(t_list *list, double (*crit)(t_list *))
 {
 	t_list *startlist;
 
+	if (!list || !crit)
+		return ;
 	startlist = list;
 	while (startlist->next)
 	{

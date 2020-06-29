@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/25 14:29:16 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/26 16:43:35 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,36 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 	}
 }
 
+void	render_floor_ceiling(t_world *world)
+{
+	int		pixel[2];
+	size_t	spot;
+
+	pixel[1] = 0;
+	while (pixel[1] < world->win_h / 2)
+	{
+		pixel[0] = 0;
+		while (pixel[0] < world->win_w)
+		{
+			spot = pixel[0] + (world->screen.linesize * pixel[1]);
+			world->screen.imgdata[spot] = world->map->cl_color;
+			pixel[0]++;
+		}
+		pixel[1]++;
+	}
+	while (pixel[1] < world->win_h)
+	{
+		pixel[0] = 0;
+		while (pixel[0] < world->win_w)
+		{
+			spot = pixel[0] + (world->screen.linesize * pixel[1]);
+			world->screen.imgdata[spot] = world->map->fl_color;
+			pixel[0]++;
+		}
+		pixel[1]++;
+	}
+}
+
 void		render(t_world *world)
 {
 	t_ray	ray;
@@ -118,15 +148,17 @@ void		render(t_world *world)
 	int		i;
 	double	x;
 
-	ft_memcpy(raydir, world->player->pos, 16);
+	ft_memcpy(raydir, world->player.pos, 16);
 	distarr = malloc(sizeof(double) * world->win_w);
 	if (!distarr)
 		error_throw("Out of memory", world, NULL, NULL);
+	obj_relpos(world);
+	render_floor_ceiling(world);
 	i = 0;
 	while (i < world->win_w)
 	{
 		x = 0.99 * (double)(i - (world->win_w / 2)) / (double)(world->win_h);
-		vec2_rot(raydir + 2, world->player->dir, 1.0, atan(x));
+		vec2_rot(raydir + 2, world->player.dir, 1.0, atan(x));
 		cast_ray(raydir, &ray, world);
 		ray.dist /= sqrt(1 + (x * x));
 		distarr[i] = ray.dist;

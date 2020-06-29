@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 15:54:40 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/25 14:14:01 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/25 15:57:28 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # endif
 # include <stddef.h>
 # include <stdint.h>
+
+typedef	uint32_t	u_int32_t;
 
 typedef struct		s_list
 {

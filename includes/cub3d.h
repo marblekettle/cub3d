@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/25 13:53:59 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/26 16:14:05 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ typedef struct	s_obj
 	t_objtype	*type;
 }				t_obj;
 
+typedef struct	s_control
+{
+	char		keypress;
+}				t_control;
+
 typedef struct	s_world
 {
 	void		*mlx;
@@ -65,11 +70,13 @@ typedef struct	s_world
 	int			win_w;
 	int			win_h;
 	t_texture	screen;
+	t_control	control;
+	t_obj		player;
 	t_list		*l_textures;
 	t_list		*l_objtypes;
 	t_list		*l_objs;
 	t_map		*map;
-	t_obj		*player;
+
 }				t_world;
 
 typedef struct	s_ray
@@ -123,5 +130,6 @@ double			sign(double num);
 void			obj_relpos(t_world *world);
 void			render_sprites(t_world *world, double *distarr);
 void			ft_lstsort(t_list *list, double (*crit)(t_list *));
+void			prepare_loop_hooks(t_world *world);
 
 #endif

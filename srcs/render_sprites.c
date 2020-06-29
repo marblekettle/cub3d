@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/19 12:54:35 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/25 14:15:16 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/26 16:11:11 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void			obj_relpos(t_world *world)
 	list = world->l_objs;
 	while (list)
 	{
-		vec[0] = ((t_obj *)(list->content))->pos[0] - world->player->pos[0];
-		vec[1] = ((t_obj *)(list->content))->pos[1] - world->player->pos[1];
-		angle = atan2(world->player->dir[1], world->player->dir[0]);
+		vec[0] = ((t_obj *)(list->content))->pos[0] - world->player.pos[0];
+		vec[1] = ((t_obj *)(list->content))->pos[1] - world->player.pos[1];
+		angle = atan2(world->player.dir[1], world->player.dir[0]);
 		vec2_rot(vec + 2, vec, 1.0, -angle);
 		ft_memcpy(((t_obj *)(list->content))->relpos, vec + 2, 16);
 		list = list->next;
