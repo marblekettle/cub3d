@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/29 11:45:06 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/30 15:55:57 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	render_walls(t_world *world, double *distarr)
 	}
 }
 
-void		render(t_world *world)
+void		render(t_world *world, char to_window)
 {
 	double	*distarr;
 
@@ -104,9 +104,12 @@ void		render(t_world *world)
 	render_floor_ceiling(world);
 	render_walls(world, distarr);
 	render_sprites(world, distarr);
-	mlx_sync(MLX_SYNC_IMAGE_WRITABLE, world->screen.img);
-	mlx_put_image_to_window(world->mlx, world->window, \
-							world->screen.img, 0, 0);
-	mlx_sync(MLX_SYNC_WIN_CMD_COMPLETED, world->window);
+	if (to_window)
+	{
+		//mlx_sync(1, world->screen.img);
+		mlx_put_image_to_window(world->mlx, world->window, \
+								world->screen.img, 0, 0);
+		//mlx_sync(3, world->window);
+	}
 	free(distarr);
 }

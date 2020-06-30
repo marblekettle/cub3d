@@ -6,12 +6,12 @@
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/27 14:49:12 by bmans         #+#    #+#                  #
-#    Updated: 2020/06/25 21:14:41 by brendan       ########   odam.nl          #
+#    Updated: 2020/06/30 16:51:19 by brendan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_IN = test_maze.c
-NAME_OUT = a.out
+NAME_IN = 
+NAME_OUT = cub3d
 SRCS_DIR = srcs
 HEADER_DIR = includes
 HEADER_DIR_LINUX = minilibx/linux/include

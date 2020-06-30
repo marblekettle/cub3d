@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/24 15:39:17 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/25 14:15:20 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/30 16:36:00 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			cast_ray(double *pos_dir, t_ray *ray, t_world *world)
 	vert = 0;
 	ray->dist = 0;
 	ray->content = check_mappoint(ray->map_point, world->map);
-	while (ray->content != ' ' && ray->content != '1' && ray->dist < MAX_DIST)
+	while (ray->content != ' ' && ray->content != '1')
 	{
 		ray->dist += jump_point(ray->point, pos_dir + 2, &vert);
 		if (vert == 2)

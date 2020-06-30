@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/26 15:26:00 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/29 10:29:34 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/30 15:56:09 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	loop_hook(void *world_ptr)
 		if (world->control.keypress & '\040')
 			move_player(world, '\04', 0.05);
 	}
-	render(world);
+	render(world, 1);
 	return (0);
 }
 

@@ -6,15 +6,14 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/29 14:11:22 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/30 16:53:27 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# ifndef MAX_DIST
-#  define MAX_DIST 20.0
-# endif
+# define WINDOW_TITLE "Labyrus vA0.02 - Powered by Loup3D"
+# define SCREENSHOT_NAME "./save.bmp"
 # include "libftprintf.h"
 
 typedef struct	s_texture
@@ -120,7 +119,7 @@ void			vec2_join(int *vecout, int *vec1, int *vec2);
 void			vec2_rot(double *out, double *in, double r, double theta);
 
 void			prepare_window(t_world *world, const char *name);
-void			render(t_world *world);
+void			render(t_world *world, char to_window);
 u_int32_t		*get_pixel(t_texture *tex, int *pixel);
 u_int32_t		*get_pixel_scaled(t_texture *tex, double *point);
 void			render_floor_ceiling(t_world *world);
@@ -129,7 +128,8 @@ char			check_map(char **map);
 void			new_obj(t_objtype *objtype, int *pos, t_world *world);
 void			move_player(t_world *world, char dir, double speed);
 
-void			save_bitmap(t_texture *image, t_world *world);
+void			save_bitmap(t_texture *image, t_world *world, char *name);
+void			prepare_screen(t_world *world);
 
 void			swap_int(int *a, int *b);
 int				abs_int(int num);

@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/20 15:57:23 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/29 14:16:02 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/30 17:39:42 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		str_to_color(char *str, t_world *world, char *file)
 
 	split = ft_split(str, ',');
 	if (!split)
-		return (0);
+		error_throw("Out of memory", world, NULL, NULL);
 	rgb[0] = ft_atoi(split[0]);
 	rgb[1] = ft_atoi(split[1]);
 	rgb[2] = ft_atoi(split[2]);

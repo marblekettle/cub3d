@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 14:20:58 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/29 14:14:51 by bmans         ########   odam.nl         */
+/*   Updated: 2020/06/30 16:23:15 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void		parse_file(int fd, t_map *map, \
 	if (!map->map)
 		error_throw("Map error: %s", world, NULL, file);
 	if (!check_map(map->map))
-		error_throw("Invalid map layou: %s", world, NULL, file);
+		error_throw("Invalid map layout: %s", world, NULL, file);
 }
 
 static void		process_objs(t_map *map, t_world *world)
