@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/30 15:55:57 by brendan       ########   odam.nl         */
+/*   Updated: 2020/07/01 17:44:50 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ void		render(t_world *world, char to_window)
 	render_sprites(world, distarr);
 	if (to_window)
 	{
-		//mlx_sync(1, world->screen.img);
+		mlx_sync(1, world->screen.img);
 		mlx_put_image_to_window(world->mlx, world->window, \
 								world->screen.img, 0, 0);
-		//mlx_sync(3, world->window);
+		mlx_sync(3, world->window);
 	}
 	free(distarr);
 }

@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/19 12:54:35 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/29 10:07:24 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/01 18:24:58 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,30 @@ static void		calculate_span(int *pixel, t_obj *obj, t_world *world)
 
 static void		obj_draw(t_obj *obj, char *mask, t_world *world)
 {
-	int			pixel[6];
-	double		scale[2];
+	int			pix[6];
+	float		scale[2];
 	u_int32_t	*fromtex;
 
-	calculate_span(pixel, obj, world);
-	pixel[4] = pixel[0] > 0 ? pixel[0] : 0;
-	while (pixel[4] < pixel[2] && pixel[4] < world->win_w)
+	calculate_span(pix, obj, world);
+	pix[4] = pix[0] > 0 ? pix[0] : 0;
+	scale[0] = (float)(pix[4] - pix[0]) / (float)(pix[2] - pix[0]);
+	while (pix[4] < pix[2] && pix[4] < world->win_w)
 	{
-		if (mask[pixel[4]])
+		if (mask[pix[4]])
 		{
-			pixel[5] = pixel[1] > 0 ? pixel[1] : 0;
-			while (pixel[5] < pixel[3] && pixel[5] < world->win_h)
+			pix[5] = pix[1] > 0 ? pix[1] : 0;
+			scale[1] = (float)(pix[5] - pix[1]) / (float)(pix[3] - pix[1]);
+			while (pix[5] < pix[3] && pix[5] < world->win_h)
 			{
-				scale[0] = (double)(pixel[4] - pixel[0]);
-				scale[0] /= (double)(pixel[2] - pixel[0]);
-				scale[1] = (double)(pixel[5] - pixel[1]);
-				scale[1] /= (double)(pixel[3] - pixel[1]);
 				fromtex = get_pixel_scaled(obj->type->sprite, scale);
 				if (*fromtex != obj->type->sprite->trans)
-					*(get_pixel(&(world->screen), pixel + 4)) = *fromtex;
-				pixel[5]++;
+					*(get_pixel(&(world->screen), pix + 4)) = *fromtex;
+				scale[1] += 1.0 / (float)(pix[3] - pix[1]);
+				pix[5]++;
 			}
 		}
-		pixel[4]++;
+		scale[0] += 1.0 / (float)(pix[2] - pix[0]);
+		pix[4]++;
 	}
 }
 

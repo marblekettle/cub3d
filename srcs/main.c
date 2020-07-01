@@ -6,21 +6,13 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/30 15:39:09 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/30 17:18:29 by brendan       ########   odam.nl         */
+/*   Updated: 2020/07/01 15:56:34 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libftprintf.h"
 #include "mlx.h"
-
-void	check_resolution(t_world *world, char *file)
-{
-	
-	if (world->win_h < 1 || world->win_w < 1)
-		error_throw("Window size invalid: %s", world, NULL, file);
-
-}
 
 void	save_screenshot(t_world *world)
 {
@@ -48,7 +40,6 @@ int		main(int ac, char **av)
 	{
 		world_init(&world);
 		load_map(av[1], &world);
-		check_resolution(&world, av[1]);
 		ft_memcpy(world.player.pos, world.map->init_pos, 16);
 		ft_memcpy(world.player.dir, world.map->init_dir, 16);
 		if (ac == 3)

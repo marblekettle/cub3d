@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/29 10:00:19 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/01 14:25:30 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	world_end(t_world *world)
 void	error_throw(const char *err, t_world *world, \
 					void *tofree, const char *file)
 {
-	ft_printf_fd(2, "Error\n");
+	ft_printf_fd(2, "Error!\n");
 	ft_printf_fd(2, err, file);
 	ft_printf_fd(2, "\n");
 	if (tofree != NULL)

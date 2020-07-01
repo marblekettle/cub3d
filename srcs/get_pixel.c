@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/29 09:56:59 by bmans         #+#    #+#                 */
-/*   Updated: 2020/06/29 09:57:29 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/01 14:38:49 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ u_int32_t	*get_pixel(t_texture *tex, int *pixel)
 		return (NULL);
 }
 
-u_int32_t	*get_pixel_scaled(t_texture *tex, double *point)
+u_int32_t	*get_pixel_scaled(t_texture *tex, float *point)
 {
 	int	pixel[2];
 

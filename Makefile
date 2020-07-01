@@ -6,7 +6,7 @@
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/27 14:49:12 by bmans         #+#    #+#                  #
-#    Updated: 2020/06/30 16:51:19 by brendan       ########   odam.nl          #
+#    Updated: 2020/07/01 15:10:40 by bmans         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,11 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 libft:
-	make -C $(LIB_DIR)
+	make -C $(LIB_DIR) all
 	make -C $(LIB_DIR) clean
 
 linux:
-	gcc $(FLAGS) $(NAME_IN) $(SRCS_DIR)/*.c -I$(HEADER_DIR) \
+	gcc $(FLAGS) $(NAME_IN) $(SRCS_DIR)/*.c linux_compat.c -I$(HEADER_DIR) \
 	-I$(HEADER_DIR_LINUX) -L$(LIB_DIR) -L$(LIB_DIR_LINUX) \
 	-lft -lmlx -lm -lX11 -lXext -o $(NAME_OUT)
 
