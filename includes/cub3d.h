@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/01 15:56:20 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/02 17:48:25 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,17 @@ typedef struct	s_control
 	char		keypress;
 }				t_control;
 
+typedef struct	s_config
+{
+	char		**config_file;
+	u_int8_t	set;
+	char		*path_no;
+	char		*path_so;
+	char		*path_we;
+	char		*path_ea;
+	char		*path_s;
+}				t_config;
+
 typedef struct	s_world
 {
 	void		*mlx;
@@ -70,6 +81,7 @@ typedef struct	s_world
 	int			win_h;
 	t_texture	screen;
 	t_control	control;
+	t_config	config;
 	t_obj		player;
 	t_list		*l_textures;
 	t_list		*l_objtypes;
@@ -104,9 +116,9 @@ void			ft_arrayclear(char ***arr);
 char			ft_arrayfind(int *spot, char *term, char **arr);
 int				**ft_arraysearch(char term, char **arr);
 
-t_map			*load_map(char *file, t_world *world);
-char			check_prefix(char *str, t_map *map, t_world *world, \
-													char *file);
+void			load_map(char *file, t_world *world);
+//char			check_prefix(char *str, t_map *map, t_world *world, \
+//													char *file);
 
 void			draw_rect(int *ul_point, int *lr_point, int color, \
 													t_world *world);
@@ -123,7 +135,7 @@ void			render(t_world *world, char to_window);
 u_int32_t		*get_pixel(t_texture *tex, int *pixel);
 u_int32_t		*get_pixel_scaled(t_texture *tex, float *point);
 void			render_floor_ceiling(t_world *world);
-char			check_map(char **map);
+//char			check_map(char **map);
 
 void			new_obj(t_objtype *objtype, int *pos, t_world *world);
 void			move_player(t_world *world, char dir, double speed);

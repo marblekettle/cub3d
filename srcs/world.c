@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/01 14:25:30 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/02 13:32:27 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,39 @@
 #include "mlx.h"
 #include <stdlib.h>
 
-void	lst_del(void *content)
+static void	lst_del(void *content)
 {
 	if (content)
 		free(content);
 }
 
-void	world_end(t_world *world)
+static void	config_clear(t_world *world)
+{
+	if (world->config.config_file)
+		ft_arrayclear(&(world->config.config_file));
+	if (world->config.path_no)
+		free(world->config.path_no);
+	if (world->config.path_so)
+		free(world->config.path_so);
+	if (world->config.path_we)
+		free(world->config.path_we);
+	if (world->config.path_ea)
+		free(world->config.path_ea);
+	if (world->config.path_s)
+		free(world->config.path_s);
+}
+
+void		world_end(t_world *world)
 {
 	if (world)
 	{
 		clear_texture_list(world, world->l_textures);
 		ft_lstclear(&(world->l_objtypes), &lst_del);
 		ft_lstclear(&(world->l_objs), &lst_del);
+		config_clear(world);
 		ft_arrayclear(&(world->map->map));
+		if (world->map)
+			free(world->map);
 		if (world->window)
 			mlx_destroy_window(world->mlx, world->window);
 		if (world->screen.img)
@@ -35,7 +54,7 @@ void	world_end(t_world *world)
 	}
 }
 
-void	error_throw(const char *err, t_world *world, \
+void		error_throw(const char *err, t_world *world, \
 					void *tofree, const char *file)
 {
 	ft_printf_fd(2, "Error!\n");
@@ -47,7 +66,7 @@ void	error_throw(const char *err, t_world *world, \
 	exit(0);
 }
 
-void	world_init(t_world *world)
+void		world_init(t_world *world)
 {
 	ft_bzero(world, sizeof(t_world));
 	world->mlx = mlx_init();
