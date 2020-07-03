@@ -6,14 +6,21 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/02 17:48:25 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/03 14:48:54 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define WINDOW_TITLE "Labyrus vA0.02 - Powered by Loup3D"
-# define SCREENSHOT_NAME "./save.bmp"
+# ifndef WINDOW_TITLE
+#  define WINDOW_TITLE "Cub3D"
+# endif
+# ifndef SCREENSHOT_NAME
+#  define SCREENSHOT_NAME "./save.bmp"
+# endif
+# ifndef TRANS_COLOR
+#  define TRANS_COLOR 0xFFFF
+# endif
 # include "libftprintf.h"
 
 typedef struct	s_texture
@@ -117,8 +124,6 @@ char			ft_arrayfind(int *spot, char *term, char **arr);
 int				**ft_arraysearch(char term, char **arr);
 
 void			load_map(char *file, t_world *world);
-//char			check_prefix(char *str, t_map *map, t_world *world, \
-//													char *file);
 
 void			draw_rect(int *ul_point, int *lr_point, int color, \
 													t_world *world);
@@ -135,7 +140,7 @@ void			render(t_world *world, char to_window);
 u_int32_t		*get_pixel(t_texture *tex, int *pixel);
 u_int32_t		*get_pixel_scaled(t_texture *tex, float *point);
 void			render_floor_ceiling(t_world *world);
-//char			check_map(char **map);
+void			check_map(char **map, t_world *world);
 
 void			new_obj(t_objtype *objtype, int *pos, t_world *world);
 void			move_player(t_world *world, char dir, double speed);

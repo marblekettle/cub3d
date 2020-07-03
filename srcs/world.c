@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/02 13:32:27 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/03 13:34:37 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		world_end(t_world *world)
 		if (world->screen.img)
 			mlx_destroy_image(world->mlx, world->screen.img);
 	}
+	//while (1) {};
 }
 
 void		error_throw(const char *err, t_world *world, \

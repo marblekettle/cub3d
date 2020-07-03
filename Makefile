@@ -6,12 +6,12 @@
 #    By: bmans <marvin@codam.nl>                      +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/27 14:49:12 by bmans         #+#    #+#                  #
-#    Updated: 2020/07/01 15:10:40 by bmans         ########   odam.nl          #
+#    Updated: 2020/07/03 14:18:44 by bmans         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_IN = 
-NAME_OUT = cub3d
+NAME_OUT = cub3D
 SRCS_DIR = srcs
 HEADER_DIR = includes
 HEADER_DIR_LINUX = minilibx/linux/include
@@ -38,3 +38,4 @@ macos:
 
 clean:
 	rm $(NAME_OUT)
+	

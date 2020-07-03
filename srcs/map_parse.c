@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/02 10:20:05 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/02 18:30:59 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/03 15:32:22 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,21 @@ void		set_resolution(char *line, t_world *world)
 
 char		number_sanity(char **arr)
 {
-	int		i[2];
-	char	broken;
+	int		i;
+	char	**split;
+	int		count;
 
-	ft_bzero(i, 8);
-	while (i[0] < 3)
+	i = 0;
+	while (i < 3)
 	{
-		broken = 0;
-		while (arr[i[0]][i[1]])
-		{
-			if (ft_isdigit(arr[i[0]][i[1]]) && arr[i[0]][i[1] + 1] == ' ')
-				broken = 1;
-			if (ft_isdigit(arr[i[0]][i[1] + 1]) && broken)
-				return (0);
-			i[1]++;
-		}
-		i[0]++;
+		split = ft_split(arr[i], ' ');
+		if (!split)
+			return (0);
+		count = ft_arraysize(split);
+		ft_arrayclear(&split);
+		if (count > 1)
+			return (0);
+		i++;
 	}
 	return (1);
 }
@@ -196,11 +195,90 @@ void		check_cub_content(char **arr, char *file, t_world *world)
 	}
 	if (world->config.set != 255)
 		error_throw("Missing or incorrect config lines: %s", world, 0, file);
+	if (world->win_h <= 0 || world->win_w <= 0)
+		error_throw("Invalid resolution", world, NULL, NULL);
 	while (arr[i])
 	{
 		ft_arraypush_back(&(world->map->map), arr[i]);
 		i++;
 	}
+}
+
+static void		process_objs(t_map *map, t_world *world)
+{
+	int			**spotlist;
+	t_list		*objlist;
+	t_objtype	*type;
+	int			i;
+
+	objlist = world->l_objtypes;
+	while (objlist)
+	{
+		type = (t_objtype *)(objlist->content);
+		spotlist = ft_arraysearch(type->id, map->map);
+		i = 0;
+		while (spotlist[i])
+		{
+			new_obj(type, spotlist[i], world);
+			i++;
+		}
+		ft_arrayclear((char ***)(&spotlist));
+		objlist = objlist->next;
+	}
+}
+
+static void		process_sprite(const char *file, t_world *world)
+{
+	t_objtype	*type;
+	t_texture	*sprite;
+	t_list		*list;
+
+	sprite = load_texture(world, file);
+	sprite->trans = TRANS_COLOR;
+	type = malloc(sizeof(t_objtype));
+	if (!type)
+		error_throw("Out of memory", world, NULL, NULL);
+	type->id = '2';
+	type->rad = 0.5;
+	type->sprite = sprite;
+	list = ft_lstnew(type);
+	if (!list)
+		error_throw("Out of memory", world, type, NULL);
+	ft_lstadd_back(&(world->l_objtypes), list);
+}
+
+static void		process_map_tex(t_map *map, t_world *world)
+{
+	map->no_tex = load_texture(world, world->config.path_no);
+	map->ea_tex = load_texture(world, world->config.path_ea);
+	map->so_tex = load_texture(world, world->config.path_so);
+	map->we_tex = load_texture(world, world->config.path_we);
+	process_sprite(world->config.path_s, world);
+}
+
+static void		process_map(t_map *map, char *file, t_world *world)
+{
+	int		spot[2];
+	char	found;
+
+	if (!map->map)
+		error_throw("Map error: %s", world, NULL, file);
+	check_map(map->map, world);
+	found = ft_arrayfind(spot, "NSWE", map->map);
+	if (!found)
+		error_throw("No player start", world, map, NULL);
+	else
+	{
+		map->init_pos[0] = (double)spot[0] + 0.5;
+		map->init_pos[1] = (double)spot[1] + 0.5;
+		ft_bzero(map->init_dir, 16);
+		if (found == 'N' || found == 'S')
+			map->init_dir[1] = (found == 'S') ? 1.0 : -1.0;
+		if (found == 'E' || found == 'W')
+			map->init_dir[0] = (found == 'E') ? 1.0 : -1.0;
+	}
+	process_map_tex(map, world);
+	process_objs(map, world);
 }
 
 void		load_map(char *file, t_world *world)
@@ -223,9 +301,10 @@ void		load_map(char *file, t_world *world)
 	close(fd);
 	check_cub_content(world->config.config_file, file, world);
 	ft_arrayclear(&(world->config.config_file));
+	process_map(world->map, file, world);
 }
 
-int			main(void)
+/*int			main(void)
 {
 	t_world world;
 
@@ -233,4 +312,14 @@ int			main(void)
 	load_map("./test.cub", &world);
 	ft_printf("Valid map!\n");
 	return (0);
-}
+}*/
+
+/*
+**	check invalid res (0 >=) (done)
+**	check for invalid chars (done)
+**	reintroduce map array checks (done)
+**	image file errors (done)
+**	valid map character set (done)
+**	wall element that is not 0 or 1 (done)
+** 
+*/

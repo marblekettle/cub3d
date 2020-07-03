@@ -1,15 +1,15 @@
-R 640 480
+R 1024 786
 F 96,64,32
 C 64,255,255
 S ./textures/torch.xpm
 SO ./textures/wall.xpm
 WE ./textures/wall.xpm
 NO ./textures/wall.xpm
-EA ./textures/wall.xpm
+EA ./textures/wall2.xpm
 
 1111111 11111
 1200101 10001
-1200W01 10201
+12W0001 10201
 1200101 10001
 1111101111011
 100000000001
