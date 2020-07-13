@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/03 13:34:37 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/10 11:09:05 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	config_clear(t_world *world)
 
 void		world_end(t_world *world)
 {
+	int	page;
+
 	if (world)
 	{
 		clear_texture_list(world, world->l_textures);
@@ -49,8 +51,17 @@ void		world_end(t_world *world)
 			free(world->map);
 		if (world->window)
 			mlx_destroy_window(world->mlx, world->window);
-		if (world->screen.img)
-			mlx_destroy_image(world->mlx, world->screen.img);
+		page = 0;
+		while (page < 2)
+		{
+			if (world->screen[page])
+			{
+				if (world->screen[page]->img)
+					mlx_destroy_image(world->mlx, world->screen[page]->img);
+				free(world->screen[page]);
+			}
+			page++;
+		}
 	}
 	//while (1) {};
 }

@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/30 15:39:09 by brendan       #+#    #+#                 */
-/*   Updated: 2020/07/01 15:56:34 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/10 10:50:02 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	save_screenshot(t_world *world)
 {
 	prepare_screen(world);
 	render(world, 0);
-	save_bitmap(&(world->screen), world, SCREENSHOT_NAME);
+	save_bitmap(world->screen[0], world, SCREENSHOT_NAME);
 	ft_printf("Saved successfully as %s\n", SCREENSHOT_NAME);
 }
 

@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/26 21:44:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/06/25 14:14:44 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/10 14:22:00 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static void	*open_texture(t_world *world, char *file, t_texture *texture)
 	close(fd);
 	if (ft_strncmp(".xpm", file + ft_strlen(file) - 4, 4) == 0)
 		img = mlx_xpm_file_to_image(world->mlx, file, &width, &height);
+	//if (ft_strncmp(".png", file + ft_strlen(file) - 4, 4) == 0)
+	//	img = mlx_png_file_to_image(world->mlx, file, &width, &height);
 	else
-		error_throw("File is not of format .xpm: %s", world, texture, file);
+		error_throw("File is not .xpm or .png: %s", world, texture, file);
 	if (!img)
 		error_throw("Loading image failed: %s", world, texture, file);
 	texture->width = width;
@@ -51,7 +53,7 @@ void		process_texture_data(t_texture *texture, t_world *world)
 	img = texture->img;
 	imgdata = mlx_get_data_addr(img, &bits_pp, &linesize, &(texture->endian));
 	if (!imgdata)
-		error_throw("Could not process screen data", world, img, NULL);
+		error_throw("Could not process texture data", world, img, NULL);
 	texture->imgdata = (u_int32_t *)imgdata;
 	texture->bytes_pp = bits_pp / 8;
 	texture->linesize = linesize / texture->bytes_pp;

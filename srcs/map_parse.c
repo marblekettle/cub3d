@@ -6,11 +6,12 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/02 10:20:05 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/03 15:32:22 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/10 14:56:39 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include "libftprintf.h"
@@ -234,12 +235,13 @@ static void		process_sprite(const char *file, t_world *world)
 	t_list		*list;
 
 	sprite = load_texture(world, file);
-	sprite->trans = TRANS_COLOR;
 	type = malloc(sizeof(t_objtype));
 	if (!type)
 		error_throw("Out of memory", world, NULL, NULL);
+	sprite->trans = TRANS_COLOR;
 	type->id = '2';
-	type->rad = 0.5;
+	type->rad = fmax((double)(sprite->width) / (double)(sprite->height), 1.0);
+	type->rad /= 2.0;
 	type->sprite = sprite;
 	list = ft_lstnew(type);
 	if (!list)

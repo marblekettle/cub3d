@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/03 14:48:54 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/10 10:57:52 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct	s_world
 	void		*window;
 	int			win_w;
 	int			win_h;
-	t_texture	screen;
+	t_texture	*screen[2];
 	t_control	control;
 	t_config	config;
 	t_obj		player;

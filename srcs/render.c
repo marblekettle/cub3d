@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/07/01 17:44:50 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/10 11:02:09 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static void	render_column(unsigned long long i, t_ray *ray, t_world *world)
 		if (tex_y >= 0 && tex_y < walltex->height)
 		{
 			color = walltex->imgdata[tex_x + (tex_y * walltex->linesize)];
-			world->screen.imgdata[i] = color;
+			world->screen[0]->imgdata[i] = color;
 		}
 		j++;
-		i += world->screen.linesize;
+		i += world->screen[0]->linesize;
 	}
 }
 
@@ -93,6 +93,15 @@ static void	render_walls(t_world *world, double *distarr)
 	}
 }
 
+void		page_flip(t_world *world)
+{
+	t_texture *temp;
+
+	temp = world->screen[1];
+	world->screen[1] = world->screen[0];
+	world->screen[0] = temp;
+}
+
 void		render(t_world *world, char to_window)
 {
 	double	*distarr;
@@ -106,10 +115,11 @@ void		render(t_world *world, char to_window)
 	render_sprites(world, distarr);
 	if (to_window)
 	{
-		mlx_sync(1, world->screen.img);
+	//	mlx_sync(1, world->screen.img);
+		page_flip(world);
 		mlx_put_image_to_window(world->mlx, world->window, \
-								world->screen.img, 0, 0);
-		mlx_sync(3, world->window);
+								world->screen[1]->img, 0, 0);
+	//	mlx_sync(3, world->window);
 	}
 	free(distarr);
 }

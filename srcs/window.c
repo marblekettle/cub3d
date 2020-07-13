@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/31 15:21:44 by brendan       #+#    #+#                 */
-/*   Updated: 2020/07/01 15:54:20 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/10 11:03:09 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,26 @@
 
 void	prepare_screen(t_world *world)
 {
-	void	*img;
+	t_texture	*screen;
+	void		*img;
+	int			page;
 
-	img = mlx_new_image(world->mlx, world->win_w, world->win_h);
-	if (!img)
-		error_throw("Could not create screen image", world, NULL, NULL);
-	world->screen.img = img;
-	world->screen.width = world->win_w;
-	world->screen.height = world->win_h;
-	process_texture_data(&(world->screen), world);
+	page = 0;
+	while (page < 2)
+	{
+		screen = malloc(sizeof(t_texture));
+		if (!screen)
+			error_throw("Out of memory", world, NULL, NULL);
+		img = mlx_new_image(world->mlx, world->win_w, world->win_h);
+		if (!img)
+			error_throw("Could not create screen image", world, screen, NULL);
+		world->screen[page] = screen;
+		world->screen[page]->img = img;
+		world->screen[page]->width = world->win_w;
+		world->screen[page]->height = world->win_h;
+		process_texture_data(world->screen[page], world);
+		page++;
+	}
 }
 
 void	prepare_window(t_world *world, const char *name)

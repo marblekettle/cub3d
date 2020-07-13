@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/19 12:54:35 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/03 13:29:24 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/10 10:21:11 by brendan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void		obj_draw(t_obj *obj, char *mask, t_world *world)
 			{
 				fromtex = get_pixel_scaled(obj->type->sprite, scale);
 				if (*fromtex != obj->type->sprite->trans)
-					*(get_pixel(&(world->screen), pix + 4)) = *fromtex;
+					*(get_pixel(world->screen[0], pix + 4)) = *fromtex;
 				scale[1] += 1.0 / (float)(pix[3] - pix[1]);
 				pix[5]++;
 			}
