@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/10 10:57:52 by brendan       ########   odam.nl         */
+/*   Updated: 2020/07/13 10:12:16 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,10 @@ void			obj_relpos(t_world *world);
 void			render_sprites(t_world *world, double *distarr);
 void			ft_lstsort(t_list *list, double (*crit)(t_list *));
 void			prepare_loop_hooks(t_world *world);
+
+void			config_action(char index, char *line, t_world *world);
+void			process_map_tex(t_map *map, t_world *world);
+void			process_sprite(const char *file, t_world *world);
+void			process_objs(t_map *map, t_world *world);
 
 #endif

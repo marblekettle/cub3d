@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/26 21:44:35 by brendan       #+#    #+#                 */
-/*   Updated: 2020/07/10 14:22:00 by brendan       ########   odam.nl         */
+/*   Updated: 2020/07/13 10:14:42 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	*open_texture(t_world *world, char *file, t_texture *texture)
 	close(fd);
 	if (ft_strncmp(".xpm", file + ft_strlen(file) - 4, 4) == 0)
 		img = mlx_xpm_file_to_image(world->mlx, file, &width, &height);
-	//if (ft_strncmp(".png", file + ft_strlen(file) - 4, 4) == 0)
-	//	img = mlx_png_file_to_image(world->mlx, file, &width, &height);
+	else if (ft_strncmp(".png", file + ft_strlen(file) - 4, 4) == 0)
+		img = mlx_png_file_to_image(world->mlx, file, &width, &height);
 	else
 		error_throw("File is not .xpm or .png: %s", world, texture, file);
 	if (!img)
@@ -95,4 +95,13 @@ t_texture	*load_texture(t_world *world, const char *file)
 		error_throw("Could not process image data: %s", world, tex, file);
 	ft_lstadd_back(&(world->l_textures), ft_lstnew(tex));
 	return (tex);
+}
+
+void		process_map_tex(t_map *map, t_world *world)
+{
+	map->no_tex = load_texture(world, world->config.path_no);
+	map->ea_tex = load_texture(world, world->config.path_ea);
+	map->so_tex = load_texture(world, world->config.path_so);
+	map->we_tex = load_texture(world, world->config.path_we);
+	process_sprite(world->config.path_s, world);
 }

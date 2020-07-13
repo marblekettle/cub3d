@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/07/10 11:02:09 by brendan       ########   odam.nl         */
+/*   Updated: 2020/07/13 09:55:43 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,10 @@ static void	render_walls(t_world *world, double *distarr)
 	}
 }
 
-void		page_flip(t_world *world)
-{
-	t_texture *temp;
-
-	temp = world->screen[1];
-	world->screen[1] = world->screen[0];
-	world->screen[0] = temp;
-}
-
 void		render(t_world *world, char to_window)
 {
-	double	*distarr;
+	double		*distarr;
+	t_texture	*temp;
 
 	obj_relpos(world);
 	distarr = malloc(sizeof(double) * world->win_w);
@@ -115,11 +107,13 @@ void		render(t_world *world, char to_window)
 	render_sprites(world, distarr);
 	if (to_window)
 	{
-	//	mlx_sync(1, world->screen.img);
-		page_flip(world);
+		temp = world->screen[1];
+		world->screen[1] = world->screen[0];
+		world->screen[0] = temp;
+		mlx_sync(1, world->screen[1]->img);
 		mlx_put_image_to_window(world->mlx, world->window, \
 								world->screen[1]->img, 0, 0);
-	//	mlx_sync(3, world->window);
+		mlx_sync(3, world->window);
 	}
 	free(distarr);
 }

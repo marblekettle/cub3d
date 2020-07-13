@@ -6,7 +6,7 @@
 /*   By: bmans <bmans@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:15:37 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/10 11:09:05 by brendan       ########   odam.nl         */
+/*   Updated: 2020/07/13 09:57:35 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void		world_end(t_world *world)
 			page++;
 		}
 	}
-	//while (1) {};
 }
 
 void		error_throw(const char *err, t_world *world, \
