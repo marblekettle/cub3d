@@ -6,7 +6,7 @@
 /*   By: brendan <brendan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/30 11:42:57 by brendan       #+#    #+#                 */
-/*   Updated: 2020/07/13 09:55:43 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/13 11:38:41 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static int	texture_y(int j, double dist, t_texture *tex, t_world *world)
 {
 	double	newj;
 
-	newj = j - (((world->win_h / 2)) * (1 - (1 / dist)));
-	if (newj >= tex->height / 2)
-		return ((int)ceil(tex->height * newj * dist / (double)world->win_h));
+	newj = 0.99 * (j - (((world->win_h / 2)) * (1 - (1 / dist))));
+	if (newj < 0.01)
+		return (-1);
 	else
 		return ((int)(tex->height * newj * dist / (double)world->win_h));
 }

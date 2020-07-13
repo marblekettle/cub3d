@@ -6,7 +6,7 @@
 /*   By: bmans <marvin@codam.nl>                      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:33:23 by bmans         #+#    #+#                 */
-/*   Updated: 2020/07/13 10:12:16 by bmans         ########   odam.nl         */
+/*   Updated: 2020/07/13 10:35:21 by bmans         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,41 +122,27 @@ size_t			ft_arraysize(char **arr);
 void			ft_arrayclear(char ***arr);
 char			ft_arrayfind(int *spot, char *term, char **arr);
 int				**ft_arraysearch(char term, char **arr);
-
 void			load_map(char *file, t_world *world);
-
-void			draw_rect(int *ul_point, int *lr_point, int color, \
-													t_world *world);
-void			draw_line(int *s_point, int *e_point, int color, \
-													t_world *world);
-
 void			cast_ray(double *pos_dir, t_ray *ray, t_world *world);
-
 void			vec2_join(int *vecout, int *vec1, int *vec2);
 void			vec2_rot(double *out, double *in, double r, double theta);
-
 void			prepare_window(t_world *world, const char *name);
 void			render(t_world *world, char to_window);
 u_int32_t		*get_pixel(t_texture *tex, int *pixel);
 u_int32_t		*get_pixel_scaled(t_texture *tex, float *point);
 void			render_floor_ceiling(t_world *world);
 void			check_map(char **map, t_world *world);
-
 void			new_obj(t_objtype *objtype, int *pos, t_world *world);
 void			move_player(t_world *world, char dir, double speed);
-
 void			save_bitmap(t_texture *image, t_world *world, char *name);
 void			prepare_screen(t_world *world);
-
 void			swap_int(int *a, int *b);
 int				abs_int(int num);
 double			sign(double num);
-
 void			obj_relpos(t_world *world);
 void			render_sprites(t_world *world, double *distarr);
 void			ft_lstsort(t_list *list, double (*crit)(t_list *));
 void			prepare_loop_hooks(t_world *world);
-
 void			config_action(char index, char *line, t_world *world);
 void			process_map_tex(t_map *map, t_world *world);
 void			process_sprite(const char *file, t_world *world);
